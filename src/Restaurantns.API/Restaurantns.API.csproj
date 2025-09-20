@@ -8,6 +8,15 @@
 
     <ItemGroup>
         <ProjectReference Include="..\Restaurantns.Application\Restaurantns.Application.csproj"/>
+        <ProjectReference Include="..\Restaurantns.Infrastructure\Restaurantns.Infrastructure.csproj"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.9">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="Scrutor" Version="6.1.0"/>
     </ItemGroup>
 
 </Project>
