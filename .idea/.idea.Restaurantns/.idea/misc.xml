@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="KubernetesApiProvider"><![CDATA[{}]]></component>
-  <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
       <profile-state>
@@ -13,5 +12,4 @@
       </profile-state>
     </entry>
   </component>
-  <component name="UnityCheckinConfiguration" checkUnsavedScenes="true" />
 </project>
