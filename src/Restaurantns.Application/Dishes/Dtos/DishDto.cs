@@ -33,5 +33,5 @@ public record DishDto
 		};
 	}
 
-	public static List<DishDto> FromEntity(List<Dish> dishes) => dishes.Select(FromEntity).ToList()!;
+	public static List<DishDto?>? FromEntity(List<Dish?>? dishes) => dishes?.Select(FromEntity).ToList();
 }

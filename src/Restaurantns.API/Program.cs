@@ -6,12 +6,19 @@ using Restaurantns.Infrastructure.Seeders;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddProblemDetails();
+builder.Services.AddProblemDetails(options =>
+{
+	options.CustomizeProblemDetails = context =>
+	{
+		context.ProblemDetails.Instance = $"{context.HttpContext.Request.Method} {context.HttpContext.Request.Path}";
+		context.ProblemDetails.Extensions.Add("requestId", context.HttpContext.TraceIdentifier);
+	};
+});
 
 builder.Services.AddControllers()
 	.AddJsonOptions(options =>
 	{
-		options.JsonSerializerOptions.IgnoreNullValues = true;
+		options.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
 		options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
 		options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
 	});
@@ -21,7 +28,7 @@ builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddApplication();
 
 builder.Services.Scan(options =>
-	options.FromAssembliesOf(typeof(IRestaurantSeeder), typeof(IRestaurantService))
+	options.FromAssembliesOf(typeof(IRestaurantSeeder), typeof(IRestaurantsDbContext))
 		.AddClasses(false)
 		.AsImplementedInterfaces()
 		.WithScopedLifetime()

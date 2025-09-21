@@ -1,10 +1,22 @@
 using MediatR;
+using Microsoft.Extensions.Logging;
 using Restaurantns.Application.Contracts;
 
 namespace Restaurantns.Application.Restaurants.Commands.CreateRestaurant;
 
-public class CreateRestaurantCommandHandler(IRestaurantService restaurantService) : IRequestHandler<CreateRestaurantCommand, int>
+public class CreateRestaurantCommandHandler(ILogger<CreateRestaurantCommandHandler> logger, IRestaurantsDbContext dbContext)
+	: IRequestHandler<CreateRestaurantCommand, int>
 {
 	public async Task<int> Handle(CreateRestaurantCommand request, CancellationToken cancellationToken)
-		=> await restaurantService.CreateRestaurant(request, cancellationToken);
+	{
+		logger.LogInformation("Creating new restaurant");
+
+		var restaurantEntity = CreateRestaurantCommand.ToEntity(request);
+
+		dbContext.Restaurants.Add(restaurantEntity);
+
+		await dbContext.SaveChangesAsync(cancellationToken);
+
+		return restaurantEntity.Id;
+	}
 }

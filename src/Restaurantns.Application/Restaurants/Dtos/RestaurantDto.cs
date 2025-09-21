@@ -25,7 +25,7 @@ public record RestaurantDto
 
 	public string? PostalCode { get; init; }
 
-	public List<DishDto> Dishes { get; init; }
+	public List<DishDto?>? Dishes { get; init; }
 
 	public static RestaurantDto? FromEntity(Restaurant? entity)
 	{

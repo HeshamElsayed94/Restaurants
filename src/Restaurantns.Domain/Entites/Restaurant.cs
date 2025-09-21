@@ -18,5 +18,5 @@ public class Restaurant
 
 	public Address? Address { get; set; }
 
-	public List<Dish> Dishes { get; set; } = [];
+	public List<Dish?>? Dishes { get; set; }
 }
