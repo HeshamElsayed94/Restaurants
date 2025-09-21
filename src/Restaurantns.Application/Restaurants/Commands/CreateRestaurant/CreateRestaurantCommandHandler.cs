@@ -9,7 +9,7 @@ public class CreateRestaurantCommandHandler(ILogger<CreateRestaurantCommandHandl
 {
 	public async Task<int> Handle(CreateRestaurantCommand request, CancellationToken cancellationToken)
 	{
-		logger.LogInformation("Creating new restaurant");
+		logger.LogInformation("Creating new restaurant {Restaurant}", request);
 
 		var restaurantEntity = CreateRestaurantCommand.ToEntity(request);
 

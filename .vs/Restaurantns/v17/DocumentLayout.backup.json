@@ -1,7 +1,20 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "E:\\Courses\\Restaurantns\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{FC2D3653-CFB9-4F78-831E-F28AB318632B}|src\\Restaurantns.API\\Restaurantns.API.csproj|e:\\courses\\restaurantns\\src\\restaurantns.api\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{FC2D3653-CFB9-4F78-831E-F28AB318632B}|src\\Restaurantns.API\\Restaurantns.API.csproj|solutionrelative:src\\restaurantns.api\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FC2D3653-CFB9-4F78-831E-F28AB318632B}|src\\Restaurantns.API\\Restaurantns.API.csproj|e:\\courses\\restaurantns\\src\\restaurantns.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FC2D3653-CFB9-4F78-831E-F28AB318632B}|src\\Restaurantns.API\\Restaurantns.API.csproj|solutionrelative:src\\restaurantns.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FC2D3653-CFB9-4F78-831E-F28AB318632B}|src\\Restaurantns.API\\Restaurantns.API.csproj|e:\\courses\\restaurantns\\src\\restaurantns.api\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{FC2D3653-CFB9-4F78-831E-F28AB318632B}|src\\Restaurantns.API\\Restaurantns.API.csproj|solutionrelative:src\\restaurantns.api\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -9,7 +22,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 6,
           "Children": [
             {
               "$type": "Bookmark",
@@ -36,8 +49,43 @@
               "Name": "ST:0:0:{ebe3f1d5-feac-4131-bf03-0e85ffb89a89}"
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "launchSettings.json",
+              "DocumentMoniker": "E:\\Courses\\Restaurantns\\src\\Restaurantns.API\\Properties\\launchSettings.json",
+              "RelativeDocumentMoniker": "src\\Restaurantns.API\\Properties\\launchSettings.json",
+              "ToolTip": "E:\\Courses\\Restaurantns\\src\\Restaurantns.API\\Properties\\launchSettings.json",
+              "RelativeToolTip": "src\\Restaurantns.API\\Properties\\launchSettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-09-21T12:52:20.669Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Program.cs",
+              "DocumentMoniker": "E:\\Courses\\Restaurantns\\src\\Restaurantns.API\\Program.cs",
+              "RelativeDocumentMoniker": "src\\Restaurantns.API\\Program.cs",
+              "ToolTip": "E:\\Courses\\Restaurantns\\src\\Restaurantns.API\\Program.cs",
+              "RelativeToolTip": "src\\Restaurantns.API\\Program.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAtwBgAAAA6AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-21T12:39:47.4Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "appsettings.Development.json",
+              "DocumentMoniker": "E:\\Courses\\Restaurantns\\src\\Restaurantns.API\\appsettings.Development.json",
+              "RelativeDocumentMoniker": "src\\Restaurantns.API\\appsettings.Development.json",
+              "ToolTip": "E:\\Courses\\Restaurantns\\src\\Restaurantns.API\\appsettings.Development.json",
+              "RelativeToolTip": "src\\Restaurantns.API\\appsettings.Development.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-09-21T12:33:05.98Z",
+              "EditorCaption": ""
             }
           ]
         }

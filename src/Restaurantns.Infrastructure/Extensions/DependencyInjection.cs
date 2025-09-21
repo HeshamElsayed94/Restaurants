@@ -11,7 +11,11 @@ public static class DependencyInjection
 	public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
 	{
 
-		services.AddDbContext<RestaurantDbContext>(op => { op.UseSqlServer(configuration.GetConnectionString("RestaurantnsDb")); });
+		services.AddDbContext<RestaurantDbContext>(op =>
+		{
+			op.UseSqlServer(configuration.GetConnectionString("RestaurantnsDb"));
+			op.EnableSensitiveDataLogging();
+		});
 
 		services.AddScoped<IRestaurantSeeder, RestaurantSeeder>();
 

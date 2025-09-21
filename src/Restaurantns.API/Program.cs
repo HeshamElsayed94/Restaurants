@@ -1,18 +1,22 @@
 using System.Text.Json.Serialization;
-using Restaurantns.Application.Contracts;
+using Restaurantns.API.Exceptions;
 using Restaurantns.Application.Extensions;
 using Restaurantns.Infrastructure.Extensions;
 using Restaurantns.Infrastructure.Seeders;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddProblemDetails(options =>
+builder.Services.AddExceptionHandler<ExceptionHandler>();
+
+builder.Host.UseSerilog((context, config) => config.ReadFrom.Configuration(context.Configuration));
+
+// builder.Services.
+
+builder.Services.AddProblemDetails(options => options.CustomizeProblemDetails = context =>
 {
-	options.CustomizeProblemDetails = context =>
-	{
-		context.ProblemDetails.Instance = $"{context.HttpContext.Request.Method} {context.HttpContext.Request.Path}";
-		context.ProblemDetails.Extensions.Add("requestId", context.HttpContext.TraceIdentifier);
-	};
+	context.ProblemDetails.Instance = $"{context.HttpContext.Request.Method} {context.HttpContext.Request.Path}";
+	context.ProblemDetails.Extensions.Add("requestId", context.HttpContext.TraceIdentifier);
 });
 
 builder.Services.AddControllers()
@@ -28,7 +32,7 @@ builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddApplication();
 
 builder.Services.Scan(options =>
-	options.FromAssembliesOf(typeof(IRestaurantSeeder), typeof(IRestaurantsDbContext))
+	options.FromAssembliesOf(typeof(IRestaurantSeeder))
 		.AddClasses(false)
 		.AsImplementedInterfaces()
 		.WithScopedLifetime()
@@ -36,8 +40,12 @@ builder.Services.Scan(options =>
 
 var app = builder.Build();
 
+app.UseExceptionHandler();
+
 using var scope = app.Services.CreateScope();
 await scope.ServiceProvider.GetRequiredService<IRestaurantSeeder>().Seed();
+
+app.UseSerilogRequestLogging();
 
 app.UseHttpsRedirection();
 
