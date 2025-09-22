@@ -16,7 +16,7 @@ public class ExceptionHandler(
 
 		httpContext.Response.StatusCode = exception switch
 		{
-			ValidationException or FluentValidation.ValidationException => StatusCodes.Status400BadRequest,
+			ValidationException or FluentValidation.ValidationException => StatusCodes.Status422UnprocessableEntity,
 			_ => StatusCodes.Status500InternalServerError
 		};
 

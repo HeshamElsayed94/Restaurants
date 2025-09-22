@@ -1,4 +1,4 @@
-namespace Restaurantns.Infrastructure.Seeders;
+namespace Restaurantns.Application.Contracts;
 
 public interface IRestaurantSeeder
 {

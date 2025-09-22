@@ -1,4 +1,4 @@
-namespace Restaurantns.Domain.Entites;
+namespace Restaurantns.Domain.Entities;
 
 public class Address
 {

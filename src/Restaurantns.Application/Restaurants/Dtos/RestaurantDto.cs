@@ -1,5 +1,5 @@
 using Restaurantns.Application.Dishes.Dtos;
-using Restaurantns.Domain.Entites;
+using Restaurantns.Domain.Entities;
 
 namespace Restaurantns.Application.Restaurants.Dtos;
 

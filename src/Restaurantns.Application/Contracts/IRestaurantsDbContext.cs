@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using Restaurantns.Domain.Entites;
+using Restaurantns.Domain.Entities;
 
 namespace Restaurantns.Application.Contracts;
 
