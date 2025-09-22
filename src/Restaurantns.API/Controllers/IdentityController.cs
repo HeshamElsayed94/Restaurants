@@ -1,16 +1,18 @@
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Restaurantns.Application.Contracts;
 using Restaurantns.Application.Users.Commands.AssignUserRole;
 using Restaurantns.Application.Users.Commands.UnAssignUserRole;
 using Restaurantns.Domain.Constans;
+using Restaurantns.Domain.Entities;
 
 namespace Restaurantns.API.Controllers;
 
 [ApiController]
 [Route("api/identity")]
-public class IdentityController(IUserContext userContext, IMediator mediator) : ControllerBase
+public class IdentityController(IUserContext userContext, IMediator mediator, SignInManager<User> signInManager) : ControllerBase
 {
 	[Authorize]
 	[HttpGet("Profile")]
@@ -38,5 +40,14 @@ public class IdentityController(IUserContext userContext, IMediator mediator) : 
 			return NoContent();
 
 		return BadRequest();
+	}
+
+	[Authorize]
+	[HttpPost("Logout")]
+	public async Task<IActionResult> UnAssignUserRole(CancellationToken ct)
+	{
+		await signInManager.SignOutAsync();
+
+		return NoContent();
 	}
 }

@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Restaurantns.Application.Contracts;
 using Restaurantns.Domain.Entities;
+using Restaurantns.Infrastructure.Authorization;
 using Restaurantns.Infrastructure.Persistence;
 using Restaurantns.Infrastructure.Seeders;
 
@@ -22,10 +23,13 @@ public static class DependencyInjection
 
 		services.AddIdentityApiEndpoints<User>()
 			.AddRoles<IdentityRole>()
-			.AddDefaultTokenProviders()
+			.AddClaimsPrincipalFactory<AppUserClaimsPrincipalFactory>()
 			.AddEntityFrameworkStores<RestaurantDbContext>();
 
 		services.AddScoped<IRestaurantSeeder, RestaurantSeeder>();
+
+		services.AddAuthorizationBuilder()
+			.AddPolicy("Admin", policy => policy.RequireRole("Admin"));
 
 		return services;
 	}

@@ -14,7 +14,7 @@ public class UnAssignUserRoleCommandHandler(
 
 	public async Task<bool> Handle(UnAssignUserRoleCommand request, CancellationToken cancellationToken)
 	{
-		logger.LogInformation("Assign user role : {request}", request);
+		logger.LogInformation("UnAssign user role : {request}", request);
 
 		var user = await userManager.FindByEmailAsync(request.UserEmail);
 
