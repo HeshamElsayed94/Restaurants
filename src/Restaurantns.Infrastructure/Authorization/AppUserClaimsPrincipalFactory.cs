@@ -21,11 +21,9 @@ public class AppUserClaimsPrincipalFactory(
 
 		if (identity.Claims.All(x => x.Type != ClaimTypes.Role))
 		{
-			await UserManager.AddToRoleAsync(user, UserRoles.User);
-
 			user.SecurityStamp = Guid.NewGuid().ToString();
 
-			await UserManager.UpdateAsync(user);
+			await UserManager.AddToRoleAsync(user, UserRoles.User);
 
 			identity.AddClaim(new(ClaimTypes.Role, UserRoles.User));
 		}
