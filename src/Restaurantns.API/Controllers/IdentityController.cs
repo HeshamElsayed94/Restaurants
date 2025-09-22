@@ -15,7 +15,6 @@ namespace Restaurantns.API.Controllers;
 public class IdentityController(IUserContext userContext, IMediator mediator, SignInManager<User> signInManager) : ControllerBase
 {
 	[Authorize]
-	[Authorize(Roles = UserRoles.Admin)]
 	[HttpGet("Profile")]
 	public IActionResult GetProfile() => Ok(userContext.GetCurrentUser());
 
