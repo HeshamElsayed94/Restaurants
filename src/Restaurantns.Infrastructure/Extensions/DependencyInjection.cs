@@ -1,10 +1,13 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Restaurantns.Application.Contracts;
+using Restaurantns.Domain.Constans;
 using Restaurantns.Domain.Entities;
 using Restaurantns.Infrastructure.Authorization;
+using Restaurantns.Infrastructure.Authorization.requirements;
 using Restaurantns.Infrastructure.Persistence;
 using Restaurantns.Infrastructure.Seeders;
 
@@ -28,8 +31,11 @@ public static class DependencyInjection
 
 		services.AddScoped<IRestaurantSeeder, RestaurantSeeder>();
 
+		services.AddScoped<IAuthorizationHandler, ValidSecurityStampRequirementsHandler>();
+
 		services.AddAuthorizationBuilder()
-			.AddPolicy("Admin", policy => policy.RequireRole("Admin"));
+			// .AddDefaultPolicy("ValidateToken", policy => policy.AddRequirements(new ValidSecurityStampRequirements()))
+			.AddPolicy(UserRoles.Admin, policy => policy.RequireRole("Admin"));
 
 		return services;
 	}

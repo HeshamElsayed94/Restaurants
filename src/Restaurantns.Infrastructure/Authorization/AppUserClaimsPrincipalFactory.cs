@@ -17,9 +17,13 @@ public class AppUserClaimsPrincipalFactory(
 
 		var identity = await GenerateClaimsAsync(user);
 
-		await UserManager.AddToRoleAsync(user, UserRoles.User);
+		var identitySecurityStamp = identity.Claims.FirstOrDefault(x => x.Type.Contains(nameof(User.SecurityStamp)));
 
-		identity.AddClaim(new(ClaimTypes.Actor, user.UserName ?? ""));
+		identity.RemoveClaim(identitySecurityStamp);
+
+		identity.AddClaim(new(nameof(User.SecurityStamp), user.SecurityStamp!));
+
+		await UserManager.AddToRoleAsync(user, UserRoles.User);
 
 		return new(identity);
 	}

@@ -1,4 +1,5 @@
 using Restaurantns.API;
+using Restaurantns.API.Middlewares;
 using Restaurantns.Application.Contracts;
 using Restaurantns.Application.Extensions;
 using Restaurantns.Domain.Entities;
@@ -33,6 +34,8 @@ app.MapGroup("api/identity")
 	.MapIdentityApi<User>();
 
 app.UseAuthentication();
+
+app.UseMiddleware<ValidateTokenSecurityStampMiddleware>();
 
 app.UseAuthorization();
 

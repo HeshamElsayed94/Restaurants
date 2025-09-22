@@ -19,6 +19,12 @@ public class AssignUserRoleCommandHandler(
 
 		if (user is null) return false;
 
+		user.SecurityStamp = Guid.NewGuid().ToString();
+
+		var securityStampUpdated = await userManager.UpdateAsync(user);
+
+		if (!securityStampUpdated.Succeeded) return false;
+
 		var roleExists = await roleManager.RoleExistsAsync(request.RoleName);
 
 		if (!roleExists) return false;
