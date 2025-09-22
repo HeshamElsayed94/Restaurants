@@ -13,7 +13,7 @@ public class ValidateTokenSecurityStampMiddleware(RequestDelegate next)
 		UserManager<User> userManager)
 	{
 
-		logger.LogInformation("validate token securityStamp for  user : {name} " + context.User.Identity!.Name);
+		logger.LogInformation("validate token securityStamp for  user : {name} ", context.User.Identity!.Name);
 
 		var endpoint = context.GetEndpoint();
 
@@ -48,7 +48,8 @@ public class ValidateTokenSecurityStampMiddleware(RequestDelegate next)
 
 				context.Response.StatusCode = StatusCodes.Status401Unauthorized;
 
-				await context.Response.WriteAsync("Token is no longer valid");
+				await context.Response.WriteAsJsonAsync("Token is no longer valid");
+				;
 			}
 		}
 		else

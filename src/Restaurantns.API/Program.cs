@@ -29,15 +29,15 @@ app.UseSerilogRequestLogging();
 
 app.UseHttpsRedirection();
 
-app.MapGroup("api/identity")
-	.WithTags("Identity")
-	.MapIdentityApi<User>();
-
 app.UseAuthentication();
 
 app.UseMiddleware<ValidateTokenSecurityStampMiddleware>();
 
 app.UseAuthorization();
+
+app.MapGroup("api/identity")
+	.WithTags("Identity")
+	.MapIdentityApi<User>();
 
 app.MapControllers();
 
