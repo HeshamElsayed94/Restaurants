@@ -14,9 +14,9 @@ public class ValidSecurityStampRequirementsHandler(ILogger<ValidSecurityStampReq
 	protected override async Task HandleRequirementAsync(AuthorizationHandlerContext context, ValidSecurityStampRequirements requirement)
 	{
 
-		logger.LogInformation("validate token securityStamp for  user : {name} " + context.User.Identity?.Name);
+		logger.LogInformation("validate token securityStamp for  user : {name} ", context.User.Identity?.Name);
 
-		var userId = context.User.FindFirstValue(ClaimTypes.NameIdentifier);
+		string? userId = context.User.FindFirstValue(ClaimTypes.NameIdentifier);
 
 		if (userId is null)
 		{
@@ -26,9 +26,9 @@ public class ValidSecurityStampRequirementsHandler(ILogger<ValidSecurityStampReq
 			return;
 		}
 
-		var tokenSecurityStamp = context.User.Claims.FirstOrDefault(c => c.Type == nameof(User.SecurityStamp))?.Value!;
+		string tokenSecurityStamp = context.User.Claims.FirstOrDefault(c => c.Type == nameof(User.SecurityStamp))?.Value!;
 
-		var userSecurityStamp = await userManager.Users.Where(x => x.Id == userId)
+		string? userSecurityStamp = await userManager.Users.Where(x => x.Id == userId)
 			.Select(x => x.SecurityStamp)
 			.FirstOrDefaultAsync();
 

@@ -1,4 +1,5 @@
 using System.Text.Json.Serialization;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.OpenApi.Models;
 using Restaurantns.API.Exceptions;
 using Serilog;
@@ -11,7 +12,9 @@ public static class DependencyInjection
 	{
 		builder.Services.AddExceptionHandler<ExceptionHandler>();
 
-		builder.Services.AddAuthentication();
+		builder.Services.AddAuthentication()
+			.AddJwtBearer(JwtBearerDefaults.AuthenticationScheme,
+				options => options.TokenValidationParameters.ClockSkew = TimeSpan.Zero);
 
 		builder.Host.UseSerilog((context, config) => config.ReadFrom.Configuration(context.Configuration));
 
@@ -47,14 +50,10 @@ public static class DependencyInjection
 				options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
 			});
 
-		builder.Services.Scan(options =>
-			{
-				options.FromAssembliesOf(typeof(Infrastructure.Extensions.DependencyInjection))
+		builder.Services.Scan(options => options.FromAssembliesOf(typeof(Infrastructure.Extensions.DependencyInjection))
 					.AddClasses(false)
 					.AsImplementedInterfaces()
-					.WithScopedLifetime();
-			}
-		);
+					.WithScopedLifetime());
 
 		builder.Services.AddEndpointsApiExplorer();
 

@@ -29,6 +29,7 @@ public static class DependencyInjection
 				options.ClaimsIdentity.SecurityStampClaimType = nameof(User.SecurityStamp);
 				options.User.RequireUniqueEmail = true;
 			})
+			.AddDefaultTokenProviders()
 			.AddRoles<IdentityRole>()
 			.AddClaimsPrincipalFactory<AppUserClaimsPrincipalFactory>()
 			.AddEntityFrameworkStores<RestaurantDbContext>();
@@ -38,7 +39,7 @@ public static class DependencyInjection
 		services.AddScoped<IAuthorizationHandler, ValidSecurityStampRequirementsHandler>();
 
 		services.AddAuthorizationBuilder()
-			// .AddDefaultPolicy("ValidateToken", policy => policy.AddRequirements(new ValidSecurityStampRequirements()))
+			//.AddDefaultPolicy("ValidateToken", policy => policy.AddRequirements(new ValidSecurityStampRequirements()))
 			.AddPolicy(UserRoles.Admin, policy => policy.RequireRole("Admin"));
 
 		return services;

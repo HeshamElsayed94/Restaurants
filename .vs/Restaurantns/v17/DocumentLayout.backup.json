@@ -3,16 +3,20 @@
   "WorkspaceRootPath": "E:\\Courses\\Restaurantns\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{FC2D3653-CFB9-4F78-831E-F28AB318632B}|src\\Restaurantns.API\\Restaurantns.API.csproj|e:\\courses\\restaurantns\\src\\restaurantns.api\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{FC2D3653-CFB9-4F78-831E-F28AB318632B}|src\\Restaurantns.API\\Restaurantns.API.csproj|solutionrelative:src\\restaurantns.api\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+      "AbsoluteMoniker": "D:0:0:{1F477816-B6EC-4BD6-A848-26A6CB613A64}|src\\Restaurantns.Infrastructure\\Restaurantns.Infrastructure.csproj|e:\\courses\\restaurantns\\src\\restaurantns.infrastructure\\authorization\\appuserclaimsprincipalfactory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1F477816-B6EC-4BD6-A848-26A6CB613A64}|src\\Restaurantns.Infrastructure\\Restaurantns.Infrastructure.csproj|solutionrelative:src\\restaurantns.infrastructure\\authorization\\appuserclaimsprincipalfactory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FC2D3653-CFB9-4F78-831E-F28AB318632B}|src\\Restaurantns.API\\Restaurantns.API.csproj|e:\\courses\\restaurantns\\src\\restaurantns.api\\middlewares\\validatetokensecuritystampmiddleware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FC2D3653-CFB9-4F78-831E-F28AB318632B}|src\\Restaurantns.API\\Restaurantns.API.csproj|solutionrelative:src\\restaurantns.api\\middlewares\\validatetokensecuritystampmiddleware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FC2D3653-CFB9-4F78-831E-F28AB318632B}|src\\Restaurantns.API\\Restaurantns.API.csproj|e:\\courses\\restaurantns\\src\\restaurantns.api\\dependencyinjection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FC2D3653-CFB9-4F78-831E-F28AB318632B}|src\\Restaurantns.API\\Restaurantns.API.csproj|solutionrelative:src\\restaurantns.api\\dependencyinjection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{FC2D3653-CFB9-4F78-831E-F28AB318632B}|src\\Restaurantns.API\\Restaurantns.API.csproj|e:\\courses\\restaurantns\\src\\restaurantns.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{FC2D3653-CFB9-4F78-831E-F28AB318632B}|src\\Restaurantns.API\\Restaurantns.API.csproj|solutionrelative:src\\restaurantns.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FC2D3653-CFB9-4F78-831E-F28AB318632B}|src\\Restaurantns.API\\Restaurantns.API.csproj|e:\\courses\\restaurantns\\src\\restaurantns.api\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{FC2D3653-CFB9-4F78-831E-F28AB318632B}|src\\Restaurantns.API\\Restaurantns.API.csproj|solutionrelative:src\\restaurantns.api\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     }
   ],
   "DocumentGroupContainers": [
@@ -51,40 +55,53 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "launchSettings.json",
-              "DocumentMoniker": "E:\\Courses\\Restaurantns\\src\\Restaurantns.API\\Properties\\launchSettings.json",
-              "RelativeDocumentMoniker": "src\\Restaurantns.API\\Properties\\launchSettings.json",
-              "ToolTip": "E:\\Courses\\Restaurantns\\src\\Restaurantns.API\\Properties\\launchSettings.json",
-              "RelativeToolTip": "src\\Restaurantns.API\\Properties\\launchSettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAEAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-09-21T12:52:20.669Z",
+              "Title": "AppUserClaimsPrincipalFactory.cs",
+              "DocumentMoniker": "E:\\Courses\\Restaurantns\\src\\Restaurantns.Infrastructure\\Authorization\\AppUserClaimsPrincipalFactory.cs",
+              "RelativeDocumentMoniker": "src\\Restaurantns.Infrastructure\\Authorization\\AppUserClaimsPrincipalFactory.cs",
+              "ToolTip": "E:\\Courses\\Restaurantns\\src\\Restaurantns.Infrastructure\\Authorization\\AppUserClaimsPrincipalFactory.cs",
+              "RelativeToolTip": "src\\Restaurantns.Infrastructure\\Authorization\\AppUserClaimsPrincipalFactory.cs",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAAABwAAAADAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-23T01:50:24.833Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "Program.cs",
-              "DocumentMoniker": "E:\\Courses\\Restaurantns\\src\\Restaurantns.API\\Program.cs",
-              "RelativeDocumentMoniker": "src\\Restaurantns.API\\Program.cs",
-              "ToolTip": "E:\\Courses\\Restaurantns\\src\\Restaurantns.API\\Program.cs",
-              "RelativeToolTip": "src\\Restaurantns.API\\Program.cs",
-              "ViewState": "AgIAAAkAAAAAAAAAAAAtwBgAAAA6AAAAAAAAAA==",
+              "Title": "ValidateTokenSecurityStampMiddleware.cs",
+              "DocumentMoniker": "E:\\Courses\\Restaurantns\\src\\Restaurantns.API\\Middlewares\\ValidateTokenSecurityStampMiddleware.cs",
+              "RelativeDocumentMoniker": "src\\Restaurantns.API\\Middlewares\\ValidateTokenSecurityStampMiddleware.cs",
+              "ToolTip": "E:\\Courses\\Restaurantns\\src\\Restaurantns.API\\Middlewares\\ValidateTokenSecurityStampMiddleware.cs",
+              "RelativeToolTip": "src\\Restaurantns.API\\Middlewares\\ValidateTokenSecurityStampMiddleware.cs",
+              "ViewState": "AgIAABsAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-21T12:39:47.4Z",
+              "WhenOpened": "2025-09-23T01:49:18.805Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "appsettings.Development.json",
-              "DocumentMoniker": "E:\\Courses\\Restaurantns\\src\\Restaurantns.API\\appsettings.Development.json",
-              "RelativeDocumentMoniker": "src\\Restaurantns.API\\appsettings.Development.json",
-              "ToolTip": "E:\\Courses\\Restaurantns\\src\\Restaurantns.API\\appsettings.Development.json",
-              "RelativeToolTip": "src\\Restaurantns.API\\appsettings.Development.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAPAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-09-21T12:33:05.98Z",
+              "Title": "DependencyInjection.cs",
+              "DocumentMoniker": "E:\\Courses\\Restaurantns\\src\\Restaurantns.API\\DependencyInjection.cs",
+              "RelativeDocumentMoniker": "src\\Restaurantns.API\\DependencyInjection.cs",
+              "ToolTip": "E:\\Courses\\Restaurantns\\src\\Restaurantns.API\\DependencyInjection.cs",
+              "RelativeToolTip": "src\\Restaurantns.API\\DependencyInjection.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAA3AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-23T01:45:55.79Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Program.cs",
+              "DocumentMoniker": "E:\\Courses\\Restaurantns\\src\\Restaurantns.API\\Program.cs",
+              "RelativeDocumentMoniker": "src\\Restaurantns.API\\Program.cs",
+              "ToolTip": "E:\\Courses\\Restaurantns\\src\\Restaurantns.API\\Program.cs",
+              "RelativeToolTip": "src\\Restaurantns.API\\Program.cs",
+              "ViewState": "AgIAAAEAAAAAAAAAAAAtwA4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-21T12:39:47.4Z",
               "EditorCaption": ""
             }
           ]
