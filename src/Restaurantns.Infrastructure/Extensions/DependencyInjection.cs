@@ -24,7 +24,11 @@ public static class DependencyInjection
 			op.EnableSensitiveDataLogging();
 		});
 
-		services.AddIdentityApiEndpoints<User>()
+		services.AddIdentityApiEndpoints<User>(options =>
+			{
+				options.ClaimsIdentity.SecurityStampClaimType = nameof(User.SecurityStamp);
+				options.User.RequireUniqueEmail = true;
+			})
 			.AddRoles<IdentityRole>()
 			.AddClaimsPrincipalFactory<AppUserClaimsPrincipalFactory>()
 			.AddEntityFrameworkStores<RestaurantDbContext>();

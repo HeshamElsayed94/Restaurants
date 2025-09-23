@@ -28,7 +28,6 @@ public class ValidateTokenSecurityStampMiddleware(RequestDelegate next)
 
 		if (context.User.Identity.IsAuthenticated)
 		{
-
 			var userId = context.User.FindFirstValue(ClaimTypes.NameIdentifier);
 
 			var tokenSecurityStamp = context.User.Claims.FirstOrDefault(c => c.Type == nameof(User.SecurityStamp))!.Value;
