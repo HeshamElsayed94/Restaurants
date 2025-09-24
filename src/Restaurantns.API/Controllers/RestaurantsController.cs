@@ -11,14 +11,15 @@ namespace Restaurantns.API.Controllers;
 public class RestaurantsController(IMediator mediator) : ControllerBase
 {
 	[HttpGet]
-	public async Task<IActionResult> GetAll(CancellationToken ct) => Ok(await mediator.Send(new GetAllRestaurantsQuery(), ct));
+	public async Task<IActionResult> GetAll([FromQuery] GetAllRestaurantsQuery query, CancellationToken ct) => Ok(await mediator.Send(query, ct));
 
 	[HttpGet("{id}")]
 	public async Task<IActionResult> GetById([FromRoute] int id, CancellationToken ct)
 	{
 		var restaurant = await mediator.Send(new GetRestaurantByIdQuery(id), ct);
 
-		if (restaurant is null) return NotFound();
+		if (restaurant is null)
+			return NotFound();
 
 		return Ok(restaurant);
 

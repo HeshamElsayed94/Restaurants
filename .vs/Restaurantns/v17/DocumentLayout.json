@@ -60,7 +60,7 @@
               "RelativeDocumentMoniker": "src\\Restaurantns.Infrastructure\\Authorization\\AppUserClaimsPrincipalFactory.cs",
               "ToolTip": "E:\\Courses\\Restaurantns\\src\\Restaurantns.Infrastructure\\Authorization\\AppUserClaimsPrincipalFactory.cs",
               "RelativeToolTip": "src\\Restaurantns.Infrastructure\\Authorization\\AppUserClaimsPrincipalFactory.cs",
-              "ViewState": "AgIAAAUAAAAAAAAAAAAqwBUAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAqwBEAAAAxAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-09-23T01:50:24.833Z",
               "EditorCaption": ""
@@ -75,8 +75,7 @@
               "RelativeToolTip": "src\\Restaurantns.API\\Middlewares\\ValidateTokenSecurityStampMiddleware.cs",
               "ViewState": "AgIAABsAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-23T01:49:18.805Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-23T01:49:18.805Z"
             },
             {
               "$type": "Document",
@@ -88,8 +87,7 @@
               "RelativeToolTip": "src\\Restaurantns.API\\DependencyInjection.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAA3AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-23T01:45:55.79Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-23T01:45:55.79Z"
             },
             {
               "$type": "Document",
@@ -101,8 +99,7 @@
               "RelativeToolTip": "src\\Restaurantns.API\\Program.cs",
               "ViewState": "AgIAAAEAAAAAAAAAAAAtwA4AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-21T12:39:47.4Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-21T12:39:47.4Z"
             }
           ]
         }
