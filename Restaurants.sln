@@ -13,7 +13,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Restaurants.Application", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Restaurants.Infrastructure", "src\Restaurants.Infrastructure\Restaurants.Infrastructure.csproj", "{1F477816-B6EC-4BD6-A848-26A6CB613A64}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Restaurants.Application.Tests", "src\Restaurants.Application.Tests\Restaurants.Application.Tests.csproj", "{49C1781C-9B59-48C8-B9BC-F942CE2D0D2B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Restaurants.Application.Tests", "Tests\Restaurants.Application.Tests\Restaurants.Application.Tests.csproj", "{49C1781C-9B59-48C8-B9BC-F942CE2D0D2B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -50,5 +52,9 @@ Global
 		{53BA4304-91A5-441F-8CFA-C8E35662115A} = {CD1CE070-5D64-4A2E-8635-0D95A6E1CD63}
 		{9FBBCB9B-EF94-4CFC-A1A9-E0D0F7946B17} = {CD1CE070-5D64-4A2E-8635-0D95A6E1CD63}
 		{1F477816-B6EC-4BD6-A848-26A6CB613A64} = {CD1CE070-5D64-4A2E-8635-0D95A6E1CD63}
+		{49C1781C-9B59-48C8-B9BC-F942CE2D0D2B} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {635121DD-7CB7-4F2E-8C6B-C634260222EA}
 	EndGlobalSection
 EndGlobal

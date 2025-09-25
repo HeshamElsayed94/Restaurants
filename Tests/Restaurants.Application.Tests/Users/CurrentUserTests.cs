@@ -31,7 +31,7 @@ public class CurrentUserTests
 	}
 
 	[Fact()]
-	public void IsInRole_WithNoMatchingRole_ShouldReturnTrue()
+	public void IsInRole_WithNoMatchingRole_ShouldReturnFalse()
 	{
 		// arrange
 
@@ -51,7 +51,7 @@ public class CurrentUserTests
 	}
 
 	[Fact()]
-	public void IsInRole_WithNoMatchingRoleCase_ShouldReturnTrue()
+	public void IsInRole_WithNoMatchingRoleCase_ShouldReturnFalse()
 	{
 		// arrange
 
