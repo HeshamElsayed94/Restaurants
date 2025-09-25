@@ -16,3 +16,9 @@ riderModule.iml
 /.vs/Restaurantns/DesignTimeBuild/.dtbcache.v2
 /.vs/Restaurants/v18/.suo
 *.v2
+*.testlog
+*.db
+*.db-shm
+*.db-wal
+*.suo
+*.manifest
