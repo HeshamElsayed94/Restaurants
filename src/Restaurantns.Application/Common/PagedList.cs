@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace Restaurantns.Application.Common;
 
-public sealed class PagedResult<T>
+public sealed class PagedList<T>
 {
-	private PagedResult(IEnumerable<T> items, int totalCount, int pageSize, int pageNumber, int totalPages)
+	private PagedList(IEnumerable<T> items, int totalCount, int pageSize, int pageNumber, int totalPages)
 	{
 		Items = items;
 		TotalCount = totalCount;
@@ -35,7 +29,7 @@ public sealed class PagedResult<T>
 
 	public IEnumerable<T> Items { get; } = default!;
 
-	public static async Task<PagedResult<T>> Create(IQueryable<T> query, int pageSize, int pageNumber, CancellationToken ct = default)
+	public static async Task<PagedList<T>> Create(IQueryable<T> query, int pageSize, int pageNumber, CancellationToken ct = default)
 	{
 		var totalCount = await query.CountAsync(ct);
 
@@ -48,7 +42,7 @@ public sealed class PagedResult<T>
 		return new(items, totalCount, pagingInfo.pageSize, pagingInfo.pageNumber, pagingInfo.toalPages);
 	}
 
-	public static PagedResult<T> Create(IEnumerable<T> items, int totalCount, int pageSize, int pageNumber)
+	public static PagedList<T> Create(IEnumerable<T> items, int totalCount, int pageSize, int pageNumber)
 	{
 		var pagingInfo = GetPagingInfo(totalCount, pageSize, pageNumber);
 
