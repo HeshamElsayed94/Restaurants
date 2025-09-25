@@ -4,4 +4,4 @@ using Restaurantns.Application.Restaurants.Dtos;
 
 namespace Restaurantns.Application.Restaurants.Queries.GetAllRestaurants;
 
-public record GetAllRestaurantsQuery(string? SearchPhrase, int PageNumber, int PageSize, string? SortBy, SortDirection SortDirection) : IRequest<PagedResult<RestaurantDto>>;
+public record GetAllRestaurantsQuery(string? SearchPhrase, int PageNumber, int PageSize, string? SortBy, string SortDirection = "asc") : IRequest<PagedResult<RestaurantDto>>;

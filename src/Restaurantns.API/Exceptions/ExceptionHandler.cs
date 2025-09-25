@@ -27,7 +27,7 @@ public class ExceptionHandler(
 			ProblemDetails = new()
 			{
 				Type = exception.GetType().Name,
-				Title = "Error occured",
+				Title = "Error occurred",
 				Detail = env.IsDevelopment() ? exception.StackTrace : exception.Message
 			}
 		});
