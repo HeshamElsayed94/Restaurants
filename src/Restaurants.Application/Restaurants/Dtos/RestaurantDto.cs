@@ -1,4 +1,3 @@
-using System.Runtime.CompilerServices;
 using Restaurants.Application.Dishes.Dtos;
 using Restaurants.Domain.Entities;
 
@@ -32,11 +31,11 @@ public record RestaurantDto
 
     public int Id { get; init; }
 
-    public string Name { get; init; }
+    public string Name { get; init; } = null!;
 
-    public string Description { get; init; }
+    public string? Description { get; init; }
 
-    public string Category { get; init; }
+    public string? Category { get; init; }
 
     public bool HasDelivery { get; init; }
 

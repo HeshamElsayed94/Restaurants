@@ -10,9 +10,9 @@ public record DishDto
 
 	public int Id { get; init; }
 
-	public string Name { get; init; }
+	public string Name { get; init; } = null!;
 
-	public string Description { get; init; }
+	public string? Description { get; init; }
 
 	public decimal Price { get; init; }
 
@@ -20,7 +20,8 @@ public record DishDto
 
 	public static DishDto? FromEntity(Dish? dish)
 	{
-		if (dish is null) return null;
+		if (dish is null)
+			return null;
 
 		return new()
 		{
