@@ -17,7 +17,7 @@ public static class DependencyInjection
 		services.AddFluentValidationAutoValidation(configuration
 			=> configuration.OverrideDefaultResultFactoryWith<CustomValidationResultFactory>());
 
-		services.AddMediatR(cofig => cofig.RegisterServicesFromAssembly(assembly));
+		services.AddMediator(optionts => optionts.ServiceLifetime = ServiceLifetime.Scoped);
 
 		services.AddHttpContextAccessor();
 

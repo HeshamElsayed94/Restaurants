@@ -1,4 +1,4 @@
-using MediatR;
+using Mediator;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
 using Restaurants.Application.Users.Commands.AssignUserRole;
@@ -12,17 +12,19 @@ public class UnAssignUserRoleCommandHandler(
 	RoleManager<IdentityRole> roleManager) : IRequestHandler<UnAssignUserRoleCommand, bool>
 {
 
-	public async Task<bool> Handle(UnAssignUserRoleCommand request, CancellationToken cancellationToken)
+	public async ValueTask<bool> Handle(UnAssignUserRoleCommand request, CancellationToken cancellationToken)
 	{
 		logger.LogInformation("UnAssign user role : {request}", request);
 
 		var user = await userManager.FindByEmailAsync(request.UserEmail);
 
-		if (user is null) return false;
+		if (user is null)
+			return false;
 
 		var roleExists = await roleManager.RoleExistsAsync(request.RoleName);
 
-		if (!roleExists) return false;
+		if (!roleExists)
+			return false;
 
 		await userManager.RemoveFromRoleAsync(user, request.RoleName);
 

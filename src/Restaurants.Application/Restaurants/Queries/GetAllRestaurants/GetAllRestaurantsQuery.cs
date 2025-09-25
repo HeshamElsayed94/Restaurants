@@ -1,4 +1,4 @@
-using MediatR;
+using Mediator;
 using Restaurants.Application.Common;
 using Restaurants.Application.Restaurants.Dtos;
 

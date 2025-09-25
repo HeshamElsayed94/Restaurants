@@ -1,4 +1,4 @@
-using MediatR;
+using Mediator;
 using Restaurants.Application.Restaurants.Dtos;
 
 namespace Restaurants.Application.Restaurants.Queries.GetRestaurantById;

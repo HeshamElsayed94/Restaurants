@@ -1,4 +1,4 @@
-using MediatR;
+using Mediator;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Restaurants.Application.Contracts;
@@ -10,7 +10,7 @@ public class GetRestaurantByIdQueryHandler(IRestaurantsDbContext dbContext, ILog
 	: IRequestHandler<GetRestaurantByIdQuery, RestaurantDto?>
 {
 
-	public async Task<RestaurantDto?> Handle(GetRestaurantByIdQuery request, CancellationToken cancellationToken)
+	public async ValueTask<RestaurantDto?> Handle(GetRestaurantByIdQuery request, CancellationToken cancellationToken)
 	{
 		logger.LogInformation("Get Restaurant {Id}", request.Id);
 

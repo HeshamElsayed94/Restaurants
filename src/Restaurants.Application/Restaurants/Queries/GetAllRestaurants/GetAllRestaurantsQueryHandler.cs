@@ -1,5 +1,5 @@
 using System.Linq.Dynamic.Core;
-using MediatR;
+using Mediator;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Restaurants.Application.Common;
@@ -12,7 +12,7 @@ namespace Restaurants.Application.Restaurants.Queries.GetAllRestaurants;
 public class GetAllRestaurantsQueryHandler(IRestaurantsDbContext dbContext, ILogger<GetAllRestaurantsQueryHandler> logger)
 	: IRequestHandler<GetAllRestaurantsQuery, PagedList<RestaurantDto>>
 {
-	public async Task<PagedList<RestaurantDto>> Handle(GetAllRestaurantsQuery request, CancellationToken cancellationToken)
+	public async ValueTask<PagedList<RestaurantDto>> Handle(GetAllRestaurantsQuery request, CancellationToken cancellationToken)
 	{
 		logger.LogInformation("Get all restaurants");
 
