@@ -18,7 +18,6 @@ public class IdentityController(IUserContext userContext, IMediator mediator, Si
 	[HttpGet("Profile")]
 	public IActionResult GetProfile() => Ok(userContext.GetCurrentUser());
 
-	[Authorize]
 	[Authorize(Roles = UserRoles.Admin)]
 	[HttpPost("userRole")]
 	public async Task<IActionResult> AssignUserRole([FromBody] AssignUserRoleCommand command, CancellationToken ct)
@@ -43,12 +42,4 @@ public class IdentityController(IUserContext userContext, IMediator mediator, Si
 		return BadRequest();
 	}
 
-	[Authorize]
-	[HttpPost("Logout")]
-	public async Task<IActionResult> UnAssignUserRole(CancellationToken ct)
-	{
-		await signInManager.SignOutAsync();
-
-		return NoContent();
-	}
 }
