@@ -2,9 +2,9 @@ using FluentValidation;
 
 namespace Restaurants.Application.Restaurants.Commands.CreateRestaurant;
 
-public class CreatRestaurantValidator : AbstractValidator<CreateRestaurantCommand>
+public class CreateRestaurantValidator : AbstractValidator<CreateRestaurantCommand>
 {
-	public CreatRestaurantValidator()
+	public CreateRestaurantValidator()
 	{
 		RuleFor(x => x.Category).NotEmpty().WithMessage("Category is required");
 		RuleFor(x => x.Name).NotEmpty().WithMessage("Name is required");
