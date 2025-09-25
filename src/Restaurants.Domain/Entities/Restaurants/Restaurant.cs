@@ -1,4 +1,4 @@
-namespace Restaurants.Domain.Entities;
+namespace Restaurants.Domain.Entities.Restaurants;
 
 public class Restaurant
 {

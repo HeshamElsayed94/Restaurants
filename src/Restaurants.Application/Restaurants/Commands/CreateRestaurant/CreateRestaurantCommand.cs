@@ -1,5 +1,5 @@
 using Mediator;
-using Restaurants.Domain.Entities;
+using Restaurants.Domain.Entities.Restaurants;
 
 namespace Restaurants.Application.Restaurants.Commands.CreateRestaurant;
 

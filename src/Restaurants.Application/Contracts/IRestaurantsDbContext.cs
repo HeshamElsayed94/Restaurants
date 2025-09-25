@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Restaurants.Domain.Entities;
+using Restaurants.Domain.Entities.Restaurants;
 
 namespace Restaurants.Application.Contracts;
 

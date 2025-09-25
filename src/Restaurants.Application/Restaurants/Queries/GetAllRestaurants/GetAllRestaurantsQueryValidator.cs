@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 using Restaurants.Application.Common;
-using Restaurants.Domain.Entities;
+using Restaurants.Domain.Entities.Restaurants;
 
 namespace Restaurants.Application.Restaurants.Queries.GetAllRestaurants;
 
