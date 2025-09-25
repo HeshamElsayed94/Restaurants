@@ -1,18 +1,16 @@
 using Mediator;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Restaurants.Application.Contracts;
 using Restaurants.Application.Users.Commands.AssignUserRole;
 using Restaurants.Application.Users.Commands.UnAssignUserRole;
 using Restaurants.Domain.Constans;
-using Restaurants.Domain.Entities;
 
 namespace Restaurants.API.Controllers;
 
 [ApiController]
 [Route("api/identity")]
-public class IdentityController(IUserContext userContext, IMediator mediator, SignInManager<User> signInManager) : ControllerBase
+public class IdentityController(IUserContext userContext, IMediator mediator) : ControllerBase
 {
 	[Authorize]
 	[HttpGet("Profile")]
