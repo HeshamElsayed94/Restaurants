@@ -11,7 +11,6 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddInfrastructure(builder.Configuration);
 builder.AddPresentation();
 builder.Services.AddApplication();
-
 var app = builder.Build();
 
 app.UseHttpsRedirection();

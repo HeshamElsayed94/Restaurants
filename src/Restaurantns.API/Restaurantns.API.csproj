@@ -7,24 +7,24 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Restaurantns.Application\Restaurantns.Application.csproj"/>
-        <ProjectReference Include="..\Restaurantns.Infrastructure\Restaurantns.Infrastructure.csproj"/>
+        <ProjectReference Include="..\Restaurantns.Application\Restaurantns.Application.csproj" />
+        <ProjectReference Include="..\Restaurantns.Infrastructure\Restaurantns.Infrastructure.csproj" />
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="9.0.9"/>
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="9.0.9" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.9">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
-        <PackageReference Include="Scrutor" Version="6.1.0"/>
-        <PackageReference Include="Serilog.AspNetCore" Version="9.0.0"/>
-        <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="9.0.4"/>
-        <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="9.0.4"/>
+        <PackageReference Include="Scrutor" Version="6.1.0" />
+        <PackageReference Include="Serilog.AspNetCore" Version="9.0.0" />
+        <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="9.0.4" />
+        <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="9.0.4" />
     </ItemGroup>
 
     <ItemGroup>
-        <Folder Include="logs\"/>
+        <Folder Include="logs\" />
     </ItemGroup>
 
 </Project>
