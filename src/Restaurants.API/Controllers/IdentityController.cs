@@ -12,7 +12,7 @@ namespace Restaurants.API.Controllers;
 [Route("api/identity")]
 public class IdentityController(IUserContext userContext, IMediator mediator) : ControllerBase
 {
-	[Authorize]
+	//[Authorize]
 	[HttpGet("Profile")]
 	public IActionResult GetProfile() => Ok(userContext.GetCurrentUser());
 
@@ -20,7 +20,7 @@ public class IdentityController(IUserContext userContext, IMediator mediator) : 
 	[HttpPost("userRole")]
 	public async Task<IActionResult> AssignUserRole([FromBody] AssignUserRoleCommand command, CancellationToken ct)
 	{
-		var assignedRole = await mediator.Send(command, ct);
+		bool assignedRole = await mediator.Send(command, ct);
 
 		if (assignedRole)
 			return NoContent();
@@ -32,7 +32,7 @@ public class IdentityController(IUserContext userContext, IMediator mediator) : 
 	[HttpDelete("userRole")]
 	public async Task<IActionResult> UnAssignUserRole([FromBody] UnAssignUserRoleCommand command, CancellationToken ct)
 	{
-		var assignedRole = await mediator.Send(command, ct);
+		bool assignedRole = await mediator.Send(command, ct);
 
 		if (assignedRole)
 			return NoContent();

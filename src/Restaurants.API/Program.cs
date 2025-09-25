@@ -1,9 +1,9 @@
 using Restaurants.API;
 using Restaurants.API.Middlewares;
-using Restaurants.Application.Contracts;
 using Restaurants.Application.Extensions;
 using Restaurants.Domain.Entities;
 using Restaurants.Infrastructure.Extensions;
+using Restaurants.Infrastructure.Seeders;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);

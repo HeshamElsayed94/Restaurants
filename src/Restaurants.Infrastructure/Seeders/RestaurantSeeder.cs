@@ -1,12 +1,11 @@
 using Microsoft.AspNetCore.Identity;
-using Restaurants.Application.Contracts;
 using Restaurants.Domain.Constans;
 using Restaurants.Domain.Entities.Restaurants;
 using Restaurants.Infrastructure.Persistence;
 
 namespace Restaurants.Infrastructure.Seeders;
 
-internal class RestaurantSeeder(RestaurantDbContext dbContext) : IRestaurantSeeder
+internal class RestaurantSeeder(RestaurantsDbContext dbContext) : IRestaurantSeeder
 {
 	public async Task Seed()
 	{

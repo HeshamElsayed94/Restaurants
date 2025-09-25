@@ -47,10 +47,19 @@ public static class DependencyInjection
 				options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
 			});
 
-		builder.Services.Scan(options => options.FromAssembliesOf(typeof(Infrastructure.Extensions.DependencyInjection))
+		builder.Services.Scan(scan =>
+		{
+			scan.FromAssembliesOf(typeof(Application.Extensions.DependencyInjection))
+			.AddClasses()
+			.AsMatchingInterface()
+			.WithScopedLifetime();
+
+			scan.FromAssembliesOf(typeof(Infrastructure.Extensions.DependencyInjection))
 			.AddClasses(false)
-			.AsImplementedInterfaces()
-			.WithScopedLifetime());
+			.AsMatchingInterface()
+			.WithScopedLifetime();
+
+		});
 
 		builder.Services.AddEndpointsApiExplorer();
 

@@ -19,8 +19,6 @@ public static class DependencyInjection
 
 		services.AddMediator(optionts => optionts.ServiceLifetime = ServiceLifetime.Scoped);
 
-		services.AddHttpContextAccessor();
-
 		return services;
 	}
 }

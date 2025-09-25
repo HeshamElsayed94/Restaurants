@@ -11,7 +11,7 @@ using Restaurants.Infrastructure.Persistence;
 
 namespace Restaurants.Infrastructure.Migrations
 {
-    [DbContext(typeof(RestaurantDbContext))]
+    [DbContext(typeof(RestaurantsDbContext))]
     [Migration("20250921160121_addIdentity")]
     partial class addIdentity
     {
