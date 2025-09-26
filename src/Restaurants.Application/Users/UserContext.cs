@@ -15,8 +15,9 @@ public class UserContext(IHttpContextAccessor contextAccessor) : IUserContext
 			return null;
 
 		string userId = user.FindFirstValue(ClaimTypes.NameIdentifier)!;
-		string userEmail =
-		user.FindFirstValue(ClaimTypes.Email)!;
+
+		string userEmail = user.FindFirstValue(ClaimTypes.Email)!;
+
 		var roles = user.FindAll(ClaimTypes.Role).Select(r => r.Value);
 
 		return new(userId, userEmail, roles);
