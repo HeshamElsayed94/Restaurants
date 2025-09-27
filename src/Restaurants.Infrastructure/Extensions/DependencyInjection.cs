@@ -25,7 +25,6 @@ public static class DependencyInjection
 				options.ClaimsIdentity.SecurityStampClaimType = nameof(User.SecurityStamp);
 				options.User.RequireUniqueEmail = true;
 			})
-			.AddDefaultTokenProviders()
 			.AddRoles<IdentityRole>()
 			.AddClaimsPrincipalFactory<AppUserClaimsPrincipalFactory>()
 			.AddEntityFrameworkStores<RestaurantsDbContext>();
