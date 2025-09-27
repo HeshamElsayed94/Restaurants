@@ -11,6 +11,8 @@ public class Result<TValue> : IResult<TValue>
 
 	public List<Error>? Errors { get; }
 
+	public bool ISuccess => _value is not null;
+
 	[JsonConstructor]
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	[Obsolete("For serialize only", true)]

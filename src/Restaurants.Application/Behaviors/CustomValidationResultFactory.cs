@@ -13,6 +13,9 @@ public class CustomValidationResultFactory : IFluentValidationAutoValidationResu
 
 		validationProblemDetails!.Status = StatusCodes.Status422UnprocessableEntity;
 
+		if (validationProblemDetails.Errors.ContainsKey("$"))
+			return new BadRequestObjectResult(validationProblemDetails);
+
 		return new UnprocessableEntityObjectResult(validationProblemDetails);
 
 	}

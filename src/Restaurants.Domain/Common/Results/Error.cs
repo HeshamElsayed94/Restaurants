@@ -21,7 +21,7 @@ public readonly record struct Error
   => new(code, description, HttpStatusCode.InternalServerError);
 
 	public static Error Validation(string code = nameof(Validation), string description = "Validation error")
-		=> new(code, description, HttpStatusCode.BadRequest);
+		=> new(code, description, HttpStatusCode.UnprocessableEntity);
 
 	public static Error Conflict(string code = nameof(Conflict), string description = "Conflict error")
 		=> new(code, description, HttpStatusCode.Conflict);

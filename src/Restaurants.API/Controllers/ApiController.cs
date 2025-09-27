@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Diagnostics;
+using Microsoft.AspNetCore.Mvc;
 using Restaurants.Domain.Common.Results;
 
 namespace Restaurants.API.Controllers;
@@ -10,7 +11,7 @@ public class ApiController : ControllerBase
 		if (errors.Count is 0)
 			return Problem();
 
-		if (errors.All(err => err.StatusCode == System.Net.HttpStatusCode.BadRequest))
+		if (errors.All(err => err.StatusCode == System.Net.HttpStatusCode.UnprocessableEntity))
 			return ValidationProblem(errors);
 
 		return Problem(errors[0]);
@@ -23,6 +24,14 @@ public class ApiController : ControllerBase
 	{
 		errors.ForEach(err => ModelState.AddModelError(err.Code, err.Description));
 
-		return ValidationProblem(ModelState);
+		var problemDetails = new ValidationProblemDetails(ModelState)
+		{
+			Type = "https://tools.ietf.org/html/rfc4918#section-11.2",
+			Instance = $"{HttpContext.Request.Method} {HttpContext.Request.Path}",
+		};
+		problemDetails.Extensions.Add("requestId", HttpContext.TraceIdentifier);
+		problemDetails.Extensions.Add("traceId", Activity.Current?.Id);
+
+		return new UnprocessableEntityObjectResult(problemDetails);
 	}
 }
