@@ -3,8 +3,8 @@ using Mediator;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Restaurants.Application.Common;
-using Restaurants.Application.Contracts;
 using Restaurants.Application.Restaurants.Dtos;
+using Restaurants.Domain.Contracts;
 using Restaurants.Domain.Entities.Restaurants;
 
 namespace Restaurants.Application.Restaurants.Queries.GetAllRestaurants;

@@ -1,16 +1,18 @@
 using Mediator;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using Restaurants.Application.Contracts;
 using Restaurants.Application.Restaurants.Dtos;
+using Restaurants.Domain.Common.Results;
+using Restaurants.Domain.Contracts;
+using Restaurants.Domain.Entities.Restaurants;
 
 namespace Restaurants.Application.Restaurants.Queries.GetRestaurantById;
 
 public class GetRestaurantByIdQueryHandler(IRestaurantsDbContext dbContext, ILogger<GetRestaurantByIdQueryHandler> logger)
-	: IRequestHandler<GetRestaurantByIdQuery, RestaurantDto?>
+	: IRequestHandler<GetRestaurantByIdQuery, Result<RestaurantDto>>
 {
 
-	public async ValueTask<RestaurantDto?> Handle(GetRestaurantByIdQuery request, CancellationToken cancellationToken)
+	public async ValueTask<Result<RestaurantDto>> Handle(GetRestaurantByIdQuery request, CancellationToken cancellationToken)
 	{
 		logger.LogInformation("Get Restaurant {Id}", request.Id);
 
@@ -19,6 +21,13 @@ public class GetRestaurantByIdQueryHandler(IRestaurantsDbContext dbContext, ILog
 			.AsNoTracking()
 			.FirstOrDefaultAsync(x => x.Id == request.Id, cancellationToken);
 
-		return RestaurantDto.FromEntity(restaurant);
+		if (restaurant is null)
+		{
+			logger.LogWarning("Restaurant with id {RestaurantId} was not found", request.Id);
+
+			return RestaurantsErrors.RestaurantNotFound(request.Id);
+		}
+
+		return RestaurantDto.FromEntity(restaurant)!;
 	}
 }

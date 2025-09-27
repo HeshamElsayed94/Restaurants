@@ -1,6 +1,6 @@
 using Mediator;
 using Microsoft.Extensions.Logging;
-using Restaurants.Application.Contracts;
+using Restaurants.Domain.Contracts;
 
 namespace Restaurants.Application.Restaurants.Commands.CreateRestaurant;
 

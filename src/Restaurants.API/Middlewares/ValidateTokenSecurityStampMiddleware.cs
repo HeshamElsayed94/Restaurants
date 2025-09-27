@@ -28,11 +28,11 @@ public class ValidateTokenSecurityStampMiddleware(RequestDelegate next)
 
 		if (context.User.Identity.IsAuthenticated)
 		{
-			var userId = context.User.FindFirstValue(ClaimTypes.NameIdentifier);
+			string? userId = context.User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-			var tokenSecurityStamp = context.User.Claims.FirstOrDefault(c => c.Type == nameof(User.SecurityStamp))!.Value;
+			string tokenSecurityStamp = context.User.Claims.FirstOrDefault(c => c.Type == nameof(User.SecurityStamp))!.Value;
 
-			var userSecurityStamp = await userManager.Users.Where(x => x.Id == userId)
+			string? userSecurityStamp = await userManager.Users.Where(x => x.Id == userId)
 				.Select(x => x.SecurityStamp)
 				.FirstOrDefaultAsync();
 

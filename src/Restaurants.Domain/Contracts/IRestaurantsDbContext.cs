@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Restaurants.Domain.Entities;
 using Restaurants.Domain.Entities.Restaurants;
 
-namespace Restaurants.Domain.Interfaces;
+namespace Restaurants.Domain.Contracts;
 
 public interface IRestaurantsDbContext
 {

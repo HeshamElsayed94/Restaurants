@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Restaurants.Application.Contracts;
+using Restaurants.Domain.Contracts;
 using Restaurants.Domain.Entities;
 using Restaurants.Domain.Entities.Restaurants;
-using Restaurants.Domain.Interfaces;
 
 namespace Restaurants.Infrastructure.Persistence;
 
