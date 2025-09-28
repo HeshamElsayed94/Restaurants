@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Restaurants.Application.Contracts;
 using Restaurants.Application.Users.Commands.AssignUserRole;
+using Restaurants.Application.Users.Commands.LogOutFromAllDevices;
 using Restaurants.Application.Users.Commands.UnAssignUserRole;
 using Restaurants.Domain.Constans;
 
@@ -38,6 +39,15 @@ public class IdentityController(IUserContext userContext, IMediator mediator) : 
 			return NoContent();
 
 		return BadRequest();
+	}
+
+	[Authorize]
+	[HttpPost("LogOutFromAllDevices")]
+	public async Task<IActionResult> LogOutFromAllDevices(CancellationToken ct)
+	{
+		await mediator.Send(new LogOutFromAllDevicesCommand(), ct);
+
+		return NoContent();
 	}
 
 }
