@@ -14,8 +14,12 @@ public class CustomValidationResultFactory : IFluentValidationAutoValidationResu
 		validationProblemDetails!.Status = StatusCodes.Status422UnprocessableEntity;
 
 		if (validationProblemDetails.Errors.ContainsKey("$"))
+		{
+			validationProblemDetails.Title = "One or more errors occurred.";
 			return new BadRequestObjectResult(validationProblemDetails);
+		}
 
+		validationProblemDetails.Type = "https://tools.ietf.org/html/rfc4918#section-11.2";
 		return new UnprocessableEntityObjectResult(validationProblemDetails);
 
 	}
