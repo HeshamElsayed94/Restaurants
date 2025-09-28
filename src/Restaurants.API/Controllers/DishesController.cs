@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Restaurants.Application.Dishes.Commands.CreateDish;
+using Restaurants.Application.Dishes.Commands.DeleteDishesForRestaurant;
 using Restaurants.Application.Dishes.Query.GetByIdForRestaurant;
 using Restaurants.Application.Dishes.Query.GetDishesForRestaurant;
 using Restaurants.Domain.Constans;
@@ -42,4 +43,14 @@ public class DishesController(IMediator mediator) : ApiController
 			Problem);
 	}
 
+	[Authorize(Roles = $"{UserRoles.Admin},{UserRoles.Owner}")]
+	[HttpDelete]
+	public async Task<IActionResult> DeleteDishesForRestaurant([FromRoute] int restaurantId, CancellationToken ct)
+	{
+		var result = await mediator.Send(
+			new DeleteDishesForRestaurantCommand(restaurantId),
+			ct);
+
+		return result.Match(_ => NoContent(), Problem);
+	}
 }
