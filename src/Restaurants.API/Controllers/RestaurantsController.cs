@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Restaurants.Application.Restaurants.Commands.CreateRestaurant;
 using Restaurants.Application.Restaurants.Commands.DeleteRestaurant;
+using Restaurants.Application.Restaurants.Commands.UpdateRestaurant;
 using Restaurants.Application.Restaurants.Queries.GetAllRestaurants;
 using Restaurants.Application.Restaurants.Queries.GetRestaurantById;
 using Restaurants.Domain.Constans;
@@ -13,7 +14,8 @@ namespace Restaurants.API.Controllers;
 public class RestaurantsController(IMediator mediator) : ApiController
 {
 	[HttpGet]
-	public async Task<IActionResult> GetAllPaged([FromQuery] GetAllRestaurantsQuery query, CancellationToken ct) => Ok(await mediator.Send(query, ct));
+	public async Task<IActionResult> GetAllPaged([FromQuery] GetAllRestaurantsQuery query, CancellationToken ct)
+		=> Ok(await mediator.Send(query, ct));
 
 	[HttpGet("{id}")]
 	public async Task<IActionResult> GetById([FromRoute] int id, CancellationToken ct)
@@ -30,8 +32,8 @@ public class RestaurantsController(IMediator mediator) : ApiController
 		var result = await mediator.Send(command, ct);
 
 		return result.Match(
-		id => CreatedAtAction(nameof(GetById), new { id }, null),
-		   Problem);
+			id => CreatedAtAction(nameof(GetById), new { id }, null),
+			Problem);
 	}
 
 	[Authorize(Roles = $"{UserRoles.Admin},{UserRoles.Owner}")]
@@ -39,6 +41,15 @@ public class RestaurantsController(IMediator mediator) : ApiController
 	public async Task<IActionResult> Delete([FromRoute] int id, CancellationToken ct)
 	{
 		var result = await mediator.Send(new DeleteRestaurantCommand(id), ct);
+
+		return result.Match(_ => NoContent(), Problem);
+	}
+
+	[Authorize(Roles = $"{UserRoles.Admin},{UserRoles.Owner}")]
+	[HttpPut("{id}")]
+	public async Task<IActionResult> Update([FromBody] UpdateRestaurantCommand command, CancellationToken ct)
+	{
+		var result = await mediator.Send(command, ct);
 
 		return result.Match(_ => NoContent(), Problem);
 	}
