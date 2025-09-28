@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Restaurants.Application.Contracts;
 using Restaurants.Domain.Contracts;
 using Restaurants.Domain.Entities;
 using Restaurants.Domain.Entities.Restaurants;
@@ -50,5 +49,10 @@ internal class RestaurantsDbContext(DbContextOptions<RestaurantsDbContext> optio
 			.HasMany(r => r.Dishes)
 			.WithOne()
 			.HasForeignKey(d => d.RestaurantId);
+
+		modelBuilder.Entity<Restaurant>()
+		.HasOne(r => r.Owner)
+		.WithMany(r => r.Restaurants)
+		.HasForeignKey(r => r.OwnerId);
 	}
 }
