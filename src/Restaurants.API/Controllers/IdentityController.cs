@@ -9,9 +9,8 @@ using Restaurants.Domain.Constans;
 
 namespace Restaurants.API.Controllers;
 
-[ApiController]
 [Route("api/identity")]
-public class IdentityController(IUserContext userContext, IMediator mediator) : ControllerBase
+public class IdentityController(IUserContext userContext, IMediator mediator) : ApiController
 {
 	//[Authorize]
 	[HttpGet("Profile")]

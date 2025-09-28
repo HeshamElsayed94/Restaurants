@@ -13,7 +13,7 @@ public class UpdateRestaurantValidator : AbstractValidator<UpdateRestaurantComma
 
 		RuleFor(x => x.Id)
 		.Must(x => x.ToString().Equals(_httpContextAccessor.HttpContext!
-			.Request.RouteValues.SingleOrDefault(k => k.Key == "id").Value!))
+			.Request.RouteValues.SingleOrDefault(k => k.Key == "id").Value))
 		.WithMessage("Id must match route value");
 
 		RuleFor(x => x.Name)

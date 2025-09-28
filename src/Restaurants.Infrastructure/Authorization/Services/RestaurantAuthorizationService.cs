@@ -28,21 +28,22 @@ public class RestaurantAuthorizationService(
 			return true;
 		}
 
-		if (operation is ResourceOperation.Read or ResourceOperation.Create)
+		if (operation is ResourceOperation.Read)
 		{
 			logger.LogInformation("{Operation} operation - successful authorization", operation);
 
 			return true;
 		}
 
-		if (operation is ResourceOperation.Update or ResourceOperation.Delete && user.Id == restaurant.OwnerId)
+		if (operation is ResourceOperation.Update or ResourceOperation.Delete or ResourceOperation.Create
+				&& user.Id == restaurant.OwnerId)
 		{
 			logger.LogInformation("{Operation} operation - successful authorization for the owner", operation);
 
 			return true;
 		}
 
-		logger.LogWarning("User with email {UserEmail} doesn't have permission to {operation} {RestaurantName}",
+		logger.LogWarning("User with email {UserEmail} doesn't have permission to {operation} '{RestaurantName}' restaurant.",
 			user.Email,
 			operation,
 			restaurant.Name);
