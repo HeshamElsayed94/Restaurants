@@ -24,7 +24,7 @@ public class GetRestaurantByIdQueryHandler(IRestaurantsDbContext dbContext, ILog
 		if (restaurant is null)
 		{
 			logger.LogWarning("Restaurant with id {RestaurantId} was not found", request.Id);
-			return RestaurantsErrors.RestaurantNotFound(request.Id);
+			return RestaurantErrors.RestaurantNotFound(request.Id);
 		}
 
 		return RestaurantDto.FromEntity(restaurant)!;

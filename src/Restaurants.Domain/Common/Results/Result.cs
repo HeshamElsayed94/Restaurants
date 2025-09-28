@@ -3,6 +3,12 @@ using System.Text.Json.Serialization;
 using Restaurants.Domain.Common.Results.Interfaces;
 
 namespace Restaurants.Domain.Common.Results;
+
+public static class Result
+{
+	public static Success Success => default;
+}
+
 public class Result<TValue> : IResult<TValue>
 {
 	private readonly TValue? _value;
@@ -11,7 +17,7 @@ public class Result<TValue> : IResult<TValue>
 
 	public List<Error>? Errors { get; }
 
-	public bool ISuccess => _value is not null;
+	public bool ISuccess => Errors is null;
 
 	[JsonConstructor]
 	[EditorBrowsable(EditorBrowsableState.Never)]
@@ -56,7 +62,7 @@ public class Result<TValue> : IResult<TValue>
 	public static implicit operator Result<TValue>(List<Error> errors) => new(errors);
 
 	public TNextValue Match<TNextValue>(Func<TValue, TNextValue> onValue, Func<List<Error>, TNextValue> onError)
-		=> _value is null ? onError(Errors!) : onValue(Value);
+		=> !ISuccess ? onError(Errors!) : onValue(Value);
 }
 
-public readonly record struct Void;
+public readonly record struct Success;
