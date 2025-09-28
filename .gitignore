@@ -22,3 +22,9 @@ riderModule.iml
 *.db-wal
 *.suo
 *.manifest
+*.name
+/.idea/.idea.Restaurants/.idea/indexLayout.xml
+/.idea/.idea.Restaurants/.idea/misc.xml
+/.idea/.idea.Restaurants/.idea/prettier.xml
+/.idea/.idea.Restaurants/.idea/vcs.xml
+/Restaurants.sln.DotSettings.user
