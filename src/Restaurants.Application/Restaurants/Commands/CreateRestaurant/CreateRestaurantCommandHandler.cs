@@ -2,6 +2,7 @@ using System.Security.Claims;
 using Mediator;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
+using Restaurants.Domain.Common.Results;
 using Restaurants.Domain.Contracts;
 
 namespace Restaurants.Application.Restaurants.Commands.CreateRestaurant;
@@ -10,9 +11,9 @@ public class CreateRestaurantCommandHandler(
 	ILogger<CreateRestaurantCommandHandler> logger,
 	IRestaurantsDbContext dbContext,
 	IHttpContextAccessor httpAcessor)
-	: IRequestHandler<CreateRestaurantCommand, int>
+	: IRequestHandler<CreateRestaurantCommand, Result<int>>
 {
-	public async ValueTask<int> Handle(CreateRestaurantCommand request, CancellationToken cancellationToken)
+	public async ValueTask<Result<int>> Handle(CreateRestaurantCommand request, CancellationToken cancellationToken)
 	{
 		string? ownerId = httpAcessor.HttpContext!.User.FindFirstValue(ClaimTypes.NameIdentifier)!;
 
