@@ -7,6 +7,7 @@ using Restaurants.Domain.Contracts;
 using Restaurants.Domain.Entities.Restaurants;
 
 namespace Restaurants.Application.Dishes.Query.GetDishesForRestaurant;
+
 public class GetDishesForRestaurantQueryHandler(ILogger<GetDishesForRestaurantQueryHandler> logger,
 IRestaurantsDbContext dbContext) : IRequestHandler<GetDishesForRestaurantQuery, Result<IEnumerable<DishDto>>>
 {
@@ -15,7 +16,8 @@ IRestaurantsDbContext dbContext) : IRequestHandler<GetDishesForRestaurantQuery, 
 		logger.LogInformation("Get dishes for restaurant with id '{Id}'", request.RestaurantId);
 
 		var restaurant = await dbContext.Restaurants.Where(x => x.Id.Equals(request.RestaurantId))
-			.Include(r => r.Dishes).FirstOrDefaultAsync(ct);
+			.Include(r => r.Dishes).AsNoTracking()
+			.FirstOrDefaultAsync(ct);
 
 		if (restaurant is null)
 		{

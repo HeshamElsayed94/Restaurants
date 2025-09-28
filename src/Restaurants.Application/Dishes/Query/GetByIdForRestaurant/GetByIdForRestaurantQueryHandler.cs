@@ -19,7 +19,7 @@ IRestaurantsDbContext dbContext) : IRequestHandler<GetByIdForRestaurantQuery, Re
 			request.RestaurantId);
 
 		var restaurant = await dbContext.Restaurants.Where(r => r.Id.Equals(request.RestaurantId))
-			.Include(x => x.Dishes.Where(d => d.Id.Equals(request.Id)))
+			.Include(x => x.Dishes.Where(d => d.Id.Equals(request.Id))).AsNoTracking()
 			.FirstOrDefaultAsync(ct);
 
 		if (restaurant is null)
