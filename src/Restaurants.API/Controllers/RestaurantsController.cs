@@ -36,6 +36,7 @@ public class RestaurantsController(IMediator mediator) : ApiController
 
 	}
 
+	[Authorize(Roles = $"{UserRoles.Admin},{UserRoles.Owner}")]
 	[HttpDelete("{id}")]
 	public async Task<IActionResult> Delete([FromRoute] int id, CancellationToken ct)
 	{
