@@ -4,6 +4,7 @@ using Microsoft.Extensions.Logging;
 using Restaurants.Application.Restaurants.Dtos;
 using Restaurants.Domain.Common.Results;
 using Restaurants.Domain.Contracts;
+using Restaurants.Domain.Entities.Restaurants;
 
 namespace Restaurants.Application.Restaurants.Queries.GetRestaurantById;
 
@@ -23,14 +24,7 @@ public class GetRestaurantByIdQueryHandler(IRestaurantsDbContext dbContext, ILog
 		if (restaurant is null)
 		{
 			logger.LogWarning("Restaurant with id {RestaurantId} was not found", request.Id);
-
-			var errors = new List<Error>();
-
-			for (int i = 0; i < 4; i++)
-			{
-				errors.Add(Error.Validation());
-			}
-			return errors;
+			return RestaurantsErrors.RestaurantNotFound(request.Id);
 		}
 
 		return RestaurantDto.FromEntity(restaurant)!;
