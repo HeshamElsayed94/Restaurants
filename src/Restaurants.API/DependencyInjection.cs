@@ -1,4 +1,6 @@
 using System.Text.Json.Serialization;
+using Marvin.Cache.Headers;
+using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.OpenApi.Models;
 using Restaurants.API.Exceptions;
 using Serilog;
@@ -62,6 +64,19 @@ public static class DependencyInjection
 		});
 
 		builder.Services.AddEndpointsApiExplorer();
+
+		builder.Services.AddResponseCompression(op =>
+		{
+			op.Providers.Add<GzipCompressionProvider>();
+			op.Providers.Add<BrotliCompressionProvider>();
+			op.MimeTypes = ["application/json", "application/xml", "text/plain", "text/html"];
+		});
+
+		builder.Services.AddHttpCacheHeaders(op =>
+		{
+			op.CacheLocation = CacheLocation.Public;
+			op.SharedMaxAge = 600;
+		}, vOp => vOp.MustRevalidate = true);
 
 	}
 }

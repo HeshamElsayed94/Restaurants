@@ -12,7 +12,7 @@ namespace Restaurants.API.Controllers;
 [Route("api/identity")]
 public class IdentityController(IUserContext userContext, IMediator mediator) : ApiController
 {
-	//[Authorize]
+	[Authorize]
 	[HttpGet("Profile")]
 	public IActionResult GetProfile() => Ok(userContext.GetCurrentUser());
 
