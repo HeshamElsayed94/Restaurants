@@ -8,6 +8,8 @@ using Restaurants.Application.Common;
 using Restaurants.Application.Restaurants.Dtos;
 using Restaurants.Application.Restaurants.Queries.Caching;
 using Restaurants.Application.Restaurants.Queries.GetAllRestaurants;
+using Restaurants.Application.Restaurants.Queries.GetRestaurantById;
+using Restaurants.Domain.Common.Results;
 using Serilog;
 
 namespace Restaurants.API;
@@ -88,7 +90,10 @@ public static class DependencyInjection
 		});
 
 		builder.Services.AddScoped<IRequestHandler<GetAllRestaurantsQuery, PagedList<RestaurantDto>>, GetAllRestaurantsQueryHandler>();
-
 		builder.Services.Decorate<IRequestHandler<GetAllRestaurantsQuery, PagedList<RestaurantDto>>, CachedGetAllRestaurantsQueryHandler>();
+
+		builder.Services.AddScoped<IRequestHandler<GetRestaurantByIdQuery, Result<RestaurantDto>>, GetRestaurantByIdQueryHandler>();
+		builder.Services.Decorate<IRequestHandler<GetRestaurantByIdQuery, Result<RestaurantDto>>, CachedGetRestaurantByIdQueryHandler>();
+
 	}
 }

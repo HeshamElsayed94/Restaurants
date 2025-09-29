@@ -1,9 +1,11 @@
+using System.Text.Json.Serialization;
 using Restaurants.Domain.Entities;
 
 namespace Restaurants.Application.Dishes.Dtos;
 
 public record DishDto
 {
+	[JsonConstructor]
 	private DishDto()
 	{
 	}

@@ -1,0 +1,28 @@
+﻿using Mediator;
+using Microsoft.Extensions.Caching.Hybrid;
+using Microsoft.Extensions.Logging;
+using Restaurants.Application.Restaurants.Dtos;
+using Restaurants.Application.Restaurants.Queries.GetRestaurantById;
+using Restaurants.Domain.Common.Results;
+
+namespace Restaurants.Application.Restaurants.Queries.Caching;
+#pragma warning disable MSG0001 // MediatorGenerator multiple handlers
+public class CachedGetRestaurantByIdQueryHandler(
+	IRequestHandler<GetRestaurantByIdQuery, Result<RestaurantDto>> requestHandler,
+	ILogger<CachedGetRestaurantByIdQueryHandler> logger,
+	HybridCache cache) : IRequestHandler<GetRestaurantByIdQuery, Result<RestaurantDto>>
+{
+	public async ValueTask<Result<RestaurantDto>> Handle(GetRestaurantByIdQuery request, CancellationToken ct)
+	{
+		logger.LogInformation("Getting restaurant with id '{Id}' from caching.", request.Id);
+
+		var result = await cache.GetOrCreateAsync($"Restaurants:{request.Id}",
+		async ct =>
+		{
+			logger.LogInformation("Cache created");
+			return await requestHandler.Handle(request, ct);
+		}, tags: [RestaurantCachingTags.Main, .. RestaurantCachingTags.Single(request.Id)], cancellationToken: ct);
+
+		return result;
+	}
+}

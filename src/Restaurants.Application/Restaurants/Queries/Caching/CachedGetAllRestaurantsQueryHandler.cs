@@ -20,8 +20,7 @@ public class CachedGetAllRestaurantsQueryHandler(
 		async ct =>
 		{
 			logger.LogInformation("Cache created");
-			var x = await requestHandler.Handle(request, ct);
-			return x;
+			return await requestHandler.Handle(request, ct);
 		}, tags: [RestaurantCachingTags.Main, RestaurantCachingTags.Paged], cancellationToken: ct);
 
 		return result;
