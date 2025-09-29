@@ -6,6 +6,7 @@ using Restaurants.Application.Restaurants.Dtos;
 using Restaurants.Application.Restaurants.Queries.GetAllRestaurants;
 
 namespace Restaurants.Application.Restaurants.Queries.Caching;
+#pragma warning disable MSG0001 // MediatorGenerator multiple handlers
 public class CachedGetAllRestaurantsQueryHandler(
 	IRequestHandler<GetAllRestaurantsQuery, PagedList<RestaurantDto>> requestHandler,
 	ILogger<CachedGetAllRestaurantsQueryHandler> logger,
