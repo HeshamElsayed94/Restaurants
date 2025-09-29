@@ -1,9 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Text.Json.Serialization;
+using Microsoft.EntityFrameworkCore;
 
 namespace Restaurants.Application.Common;
 
 public sealed class PagedList<T>
 {
+
+	[JsonConstructor]
 	private PagedList(IEnumerable<T> items, int totalCount, int pageSize, int pageNumber, int totalPages)
 	{
 		Items = items;
@@ -12,7 +15,7 @@ public sealed class PagedList<T>
 		PageNumber = pageNumber;
 		TotalPages = totalPages;
 		ItemsFrom = TotalCount > 0 ? (PageSize * (PageNumber - 1)) + 1 : 0;
-		ItemsTo = TotalCount > 0 ? ItemsFrom + PageSize - 1 : 0;
+		ItemsTo = TotalCount > 0 ? Math.Min(ItemsFrom + PageSize - 1, TotalCount) : 0;
 	}
 
 	public int PageSize { get; }
@@ -31,11 +34,11 @@ public sealed class PagedList<T>
 
 	public static async Task<PagedList<T>> Create(IQueryable<T> query, int pageSize, int pageNumber, CancellationToken ct = default)
 	{
-		var totalCount = await query.CountAsync(ct);
+		int totalCount = await query.CountAsync(ct);
 
 		var pagingInfo = GetPagingInfo(totalCount, pageSize, pageNumber);
 
-		var skippedCount = pagingInfo.pageSize * (pagingInfo.pageNumber - 1);
+		int skippedCount = pagingInfo.pageSize * (pagingInfo.pageNumber - 1);
 
 		var items = await query.Skip(skippedCount).Take(pagingInfo.pageSize).ToListAsync(ct);
 
@@ -53,10 +56,10 @@ public sealed class PagedList<T>
 	{
 		pageSize = Math.Clamp(pageSize, 1, 100);
 
-		var totalPages = Math.Max(1, (int)Math.Ceiling(totalCount / (double)pageSize));
+		int totalPages = Math.Max(1, (int)Math.Ceiling(totalCount / (double)pageSize));
 
 		pageNumber = Math.Clamp(pageNumber, 1, totalPages);
 
-		return (totalCount, pageSize, pageNumber);
+		return (totalPages, pageSize, pageNumber);
 	}
 }

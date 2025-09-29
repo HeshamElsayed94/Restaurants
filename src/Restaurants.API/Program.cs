@@ -10,9 +10,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddInfrastructure(builder.Configuration);
 
-builder.AddPresentation();
-
 builder.Services.AddApplication();
+
+builder.AddPresentation();
 
 var app = builder.Build();
 
@@ -22,12 +22,12 @@ app.UseHttpsRedirection();
 
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+	app.UseSwagger();
+	app.UseSwaggerUI();
 }
 else
 {
-    app.UseHsts();
+	app.UseHsts();
 }
 
 using var scope = app.Services.CreateScope();
@@ -46,8 +46,8 @@ app.UseAuthorization();
 app.UseHttpCacheHeaders();
 
 app.MapGroup("api/identity")
-    .WithTags("Identity")
-    .MapIdentityApi<User>();
+	.WithTags("Identity")
+	.MapIdentityApi<User>();
 
 app.MapControllers();
 

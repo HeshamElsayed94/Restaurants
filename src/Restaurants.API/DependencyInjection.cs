@@ -1,8 +1,13 @@
 using System.Text.Json.Serialization;
 using Marvin.Cache.Headers;
+using Mediator;
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.OpenApi.Models;
 using Restaurants.API.Exceptions;
+using Restaurants.Application.Common;
+using Restaurants.Application.Restaurants.Dtos;
+using Restaurants.Application.Restaurants.Queries.Caching;
+using Restaurants.Application.Restaurants.Queries.GetAllRestaurants;
 using Serilog;
 
 namespace Restaurants.API;
@@ -57,9 +62,7 @@ public static class DependencyInjection
 			.WithScopedLifetime();
 
 			scan.FromAssembliesOf(typeof(Infrastructure.Extensions.DependencyInjection))
-			.AddClasses(false)
-			.AsMatchingInterface()
-			.WithScopedLifetime();
+			.AddClasses(false).AsMatchingInterface().WithScopedLifetime();
 
 		});
 
@@ -78,5 +81,14 @@ public static class DependencyInjection
 			op.SharedMaxAge = 600;
 		}, vOp => vOp.MustRevalidate = true);
 
+		builder.Services.AddHybridCache(op => op.DefaultEntryOptions = new()
+		{
+			Expiration = TimeSpan.FromMinutes(30),
+			LocalCacheExpiration = TimeSpan.FromMinutes(10),
+		});
+
+		builder.Services.AddScoped<IRequestHandler<GetAllRestaurantsQuery, PagedList<RestaurantDto>>, GetAllRestaurantsQueryHandler>();
+
+		builder.Services.Decorate<IRequestHandler<GetAllRestaurantsQuery, PagedList<RestaurantDto>>, CachedGetAllRestaurantsQueryHandler>();
 	}
 }

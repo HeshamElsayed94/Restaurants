@@ -10,9 +10,7 @@ public static class DependencyInjection
 	public static IServiceCollection AddApplication(this IServiceCollection services)
 	{
 
-		var assembly = typeof(DependencyInjection).Assembly;
-
-		services.AddValidatorsFromAssembly(assembly);
+		services.AddValidatorsFromAssembly(typeof(DependencyInjection).Assembly);
 
 		services.AddFluentValidationAutoValidation(configuration
 			=> configuration.OverrideDefaultResultFactoryWith<CustomValidationResultFactory>());

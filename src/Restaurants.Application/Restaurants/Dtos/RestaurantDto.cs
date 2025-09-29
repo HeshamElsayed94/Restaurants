@@ -1,3 +1,4 @@
+using System.Text.Json.Serialization;
 using Restaurants.Application.Dishes.Dtos;
 using Restaurants.Domain.Entities.Restaurants;
 
@@ -6,16 +7,13 @@ namespace Restaurants.Application.Restaurants.Dtos;
 public record RestaurantDto
 {
 
-	private RestaurantDto()
-	{
-
-	}
-
 	public RestaurantDto(Restaurant restaurant)
 	: this(restaurant.Id, restaurant.Name, restaurant.Description, restaurant.Category, restaurant.HasDelivery, restaurant.Address?.City, restaurant.Address?.Street, restaurant.Address?.PostalCode)
 	{
 
 	}
+
+	[JsonConstructor]
 	public RestaurantDto(
 		int id,
 		string name,
@@ -61,16 +59,8 @@ public record RestaurantDto
 		if (entity is null)
 			return null;
 
-		return new()
+		return new(entity)
 		{
-			Id = entity.Id,
-			Name = entity.Name,
-			Description = entity.Description,
-			Category = entity.Category,
-			HasDelivery = entity.HasDelivery,
-			City = entity.Address?.City,
-			Street = entity.Address?.Street,
-			PostalCode = entity.Address?.PostalCode,
 			Dishes = DishDto.FromEntity(entity.Dishes)
 		};
 	}
