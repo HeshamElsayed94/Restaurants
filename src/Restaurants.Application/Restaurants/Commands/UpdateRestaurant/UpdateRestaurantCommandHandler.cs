@@ -1,7 +1,9 @@
 using Mediator;
+using Microsoft.Extensions.Caching.Hybrid;
 using Microsoft.Extensions.Logging;
 using Restaurants.Application.Contracts;
 using Restaurants.Application.Restaurants.Commands.Extensions;
+using Restaurants.Application.Restaurants.Queries.Caching;
 using Restaurants.Domain.Common.Results;
 using Restaurants.Domain.Constans;
 using Restaurants.Domain.Contracts;
@@ -13,10 +15,11 @@ public class UpdateRestaurantCommandHandler(
 	ILogger<UpdateRestaurantCommandHandler> logger,
 	IRestaurantsDbContext dbContext,
 	IUserContext userContext,
+	HybridCache cache,
 	IRestaurantAuthorizationService authorizationService) : IRequestHandler<UpdateRestaurantCommand, Result<Success>>
 {
 
-	public async ValueTask<Result<Success>> Handle(UpdateRestaurantCommand request, CancellationToken cancellationToken)
+	public async ValueTask<Result<Success>> Handle(UpdateRestaurantCommand request, CancellationToken ct)
 	{
 		logger.LogInformation("Update restaurant with id '{Id}'", request.Id);
 
@@ -36,7 +39,9 @@ public class UpdateRestaurantCommandHandler(
 
 		restaurant.Update(request);
 
-		await dbContext.SaveChangesAsync(cancellationToken);
+		await dbContext.SaveChangesAsync(ct);
+
+		await cache.RemoveByTagAsync(RestaurantCachingTags.Single(request.Id), ct);
 
 		return Result.Success;
 	}
