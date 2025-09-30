@@ -1,5 +1,4 @@
 using System.Text.Json.Serialization;
-using Marvin.Cache.Headers.Interfaces;
 using Mediator;
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.OpenApi.Models;
@@ -83,7 +82,7 @@ public static class DependencyInjection
 			Expiration = TimeSpan.FromMinutes(30),
 			LocalCacheExpiration = TimeSpan.FromMinutes(10),
 		});
-		IETagGenerator
+
 		builder.Services.AddScoped<IRequestHandler<GetAllRestaurantsQuery, PagedList<RestaurantDto>>, GetAllRestaurantsQueryHandler>();
 		builder.Services.Decorate<IRequestHandler<GetAllRestaurantsQuery, PagedList<RestaurantDto>>, CachedGetAllRestaurantsQueryHandler>();
 

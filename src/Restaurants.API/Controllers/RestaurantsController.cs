@@ -1,4 +1,3 @@
-using Marvin.Cache.Headers;
 using Mediator;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -14,11 +13,10 @@ namespace Restaurants.API.Controllers;
 [Route("api/restaurants")]
 public class RestaurantsController(IMediator mediator) : ApiController
 {
-	[HttpCacheIgnore]
+
 	[HttpGet]
 	public async Task<IActionResult> GetAllPaged([FromQuery] GetAllRestaurantsQuery query, CancellationToken ct) => Ok(await mediator.Send(query, ct));
 
-	//[HttpCacheIgnore]
 	[HttpGet("{id}")]
 	public async Task<IActionResult> GetById([FromRoute] int id, CancellationToken ct)
 	{

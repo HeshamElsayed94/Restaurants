@@ -20,9 +20,10 @@ public class HttpHeaderCacheFilter : IAsyncResultFilter
 			}
 			else
 			{
-				string expires = DateTime.UtcNow.AddMinutes(1).ToString("R");
+				const int expiresInSeconds = 60;
+				string expires = DateTime.UtcNow.AddSeconds(expiresInSeconds).ToString("R");
 				context.HttpContext.Response.Headers.Expires = new(expires);
-				context.HttpContext.Response.Headers.CacheControl = new StringValues("public,max-age=60,s-maxage=600,must-revalidate");
+				context.HttpContext.Response.Headers.CacheControl = new StringValues($"public,max-age={expiresInSeconds},s-maxage=600,must-revalidate");
 			}
 
 			context.HttpContext.Response.Headers.ETag = eTag;

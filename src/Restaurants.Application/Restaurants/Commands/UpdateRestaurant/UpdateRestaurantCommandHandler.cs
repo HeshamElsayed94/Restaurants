@@ -21,7 +21,9 @@ public class UpdateRestaurantCommandHandler(
 
 	public async ValueTask<Result<Success>> Handle(UpdateRestaurantCommand request, CancellationToken ct)
 	{
-		logger.LogInformation("Update restaurant with id '{Id}'", request.Id);
+		var user = userContext.GetCurrentUser();
+
+		logger.LogInformation("User with email {Email} updating restaurant with id '{Id}'", user!.Email, request.Id);
 
 		var restaurant = dbContext.Restaurants.FirstOrDefault(x => x.Id.Equals(request.Id));
 

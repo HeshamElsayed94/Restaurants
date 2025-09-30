@@ -1,5 +1,4 @@
-﻿using Marvin.Cache.Headers;
-using Mediator;
+﻿using Mediator;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Restaurants.Application.Dishes.Commands.CreateDish;
@@ -25,7 +24,6 @@ public class DishesController(IMediator mediator) : ApiController
 		return result.Match(Ok, Problem);
 	}
 
-	[HttpCacheIgnore]
 	[HttpGet]
 	public async Task<IActionResult> GetAllDishesForRestaurant([FromRoute] int restaurantId, CancellationToken ct)
 	{
