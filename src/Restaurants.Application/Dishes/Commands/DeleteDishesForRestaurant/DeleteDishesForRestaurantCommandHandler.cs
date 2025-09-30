@@ -1,6 +1,8 @@
 ﻿using Mediator;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Hybrid;
 using Microsoft.Extensions.Logging;
+using Restaurants.Application.Restaurants.Queries.Caching;
 using Restaurants.Domain.Common.Results;
 using Restaurants.Domain.Constans;
 using Restaurants.Domain.Contracts;
@@ -10,7 +12,8 @@ namespace Restaurants.Application.Dishes.Commands.DeleteDishesForRestaurant;
 
 public class DeleteDishesForRestaurantCommandHandler(ILogger<DeleteDishesForRestaurantCommandHandler> logger,
 IRestaurantsDbContext dbContext,
-IRestaurantAuthorizationService authorizationService) : IRequestHandler<DeleteDishesForRestaurantCommand, Result<Success>>
+IRestaurantAuthorizationService authorizationService,
+HybridCache cache) : IRequestHandler<DeleteDishesForRestaurantCommand, Result<Success>>
 {
 	public async ValueTask<Result<Success>> Handle(DeleteDishesForRestaurantCommand request, CancellationToken ct)
 	{
@@ -35,6 +38,8 @@ IRestaurantAuthorizationService authorizationService) : IRequestHandler<DeleteDi
 		dbContext.Dishes.RemoveRange(restaurant.Dishes);
 
 		await dbContext.SaveChangesAsync(ct);
+
+		await cache.RemoveByTagAsync(RestaurantCachingTags.Single(request.RestaurantId), ct);
 
 		return Result.Success;
 	}
