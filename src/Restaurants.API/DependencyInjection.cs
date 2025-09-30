@@ -8,6 +8,7 @@ using Restaurants.Application.Common;
 using Restaurants.Application.Dishes.Dtos;
 using Restaurants.Application.Dishes.Query.Caching;
 using Restaurants.Application.Dishes.Query.GetByIdForRestaurant;
+using Restaurants.Application.Dishes.Query.GetDishesForRestaurant;
 using Restaurants.Application.Restaurants.Dtos;
 using Restaurants.Application.Restaurants.Queries.Caching;
 using Restaurants.Application.Restaurants.Queries.GetAllRestaurants;
@@ -95,5 +96,7 @@ public static class DependencyInjection
 		builder.Services.AddScoped<IRequestHandler<GetDishByIdForRestaurantQuery, Result<DishDto>>, GetDishByIdForRestaurantQueryHandler>();
 		builder.Services.Decorate<IRequestHandler<GetDishByIdForRestaurantQuery, Result<DishDto>>, CachedGetDishByIdForRestaurantQueryHandler>();
 
+		builder.Services.AddScoped<IRequestHandler<GetDishesForRestaurantQuery, Result<IEnumerable<DishDto>>>, GetDishesForRestaurantQueryHandler>();
+		builder.Services.Decorate<IRequestHandler<GetDishesForRestaurantQuery, Result<IEnumerable<DishDto>>>, CachedGetDishesForRestaurantQueryHandler>();
 	}
 }

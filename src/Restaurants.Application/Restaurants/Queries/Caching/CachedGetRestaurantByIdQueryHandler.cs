@@ -15,7 +15,8 @@ public class CachedGetRestaurantByIdQueryHandler(
 	{
 		logger.LogInformation("Getting restaurant with id '{Id}' from caching.", request.Id);
 
-		var result = await cache.GetOrCreateAsync($"Restaurants:{request.Id}",
+		var result = await cache.GetOrCreateAsync(
+		$"Restaurants:{request.Id}",
 		async ct =>
 		{
 			logger.LogInformation("Cache created");

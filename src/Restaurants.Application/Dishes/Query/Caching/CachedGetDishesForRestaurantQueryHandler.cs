@@ -2,26 +2,23 @@
 using Microsoft.Extensions.Caching.Hybrid;
 using Microsoft.Extensions.Logging;
 using Restaurants.Application.Dishes.Dtos;
-using Restaurants.Application.Dishes.Query.GetByIdForRestaurant;
+using Restaurants.Application.Dishes.Query.GetDishesForRestaurant;
 using Restaurants.Application.Restaurants.Queries.Caching;
 using Restaurants.Domain.Common.Results;
 
 namespace Restaurants.Application.Dishes.Query.Caching;
-public class CachedGetDishByIdForRestaurantQueryHandler(ILogger<CachedGetDishByIdForRestaurantQueryHandler> logger,
-HybridCache cache,
-IRequestHandler<GetDishByIdForRestaurantQuery, Result<DishDto>> handler)
-: IRequestHandler<GetDishByIdForRestaurantQuery, Result<DishDto>>
+public class CachedGetDishesForRestaurantQueryHandler(ILogger<CachedGetDishesForRestaurantQueryHandler> logger,
+IRequestHandler<GetDishesForRestaurantQuery, Result<IEnumerable<DishDto>>> handler,
+HybridCache cache) : IRequestHandler<GetDishesForRestaurantQuery, Result<IEnumerable<DishDto>>>
 {
-	public async ValueTask<Result<DishDto>> Handle(GetDishByIdForRestaurantQuery request, CancellationToken ct)
+	public async ValueTask<Result<IEnumerable<DishDto>>> Handle(GetDishesForRestaurantQuery request, CancellationToken ct)
 	{
 		logger.LogInformation(
-			"Get dish with id '{Id}' for restaurant with id '{RestaurantId}' from caching.",
-			request.Id,
+			"Get dishes for restaurant with id '{Id}' from cache.",
 			request.RestaurantId);
-		;
 
 		var result = await cache.GetOrCreateAsync(
-		$"Restaurants{request.RestaurantId}:Dishes:{request.Id}",
+		$"Restaurants{request.RestaurantId}:Dishes",
 		async ct =>
 		{
 			logger.LogInformation("Cache created");
