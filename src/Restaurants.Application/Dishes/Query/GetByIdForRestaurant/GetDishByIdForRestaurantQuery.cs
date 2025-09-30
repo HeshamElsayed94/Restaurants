@@ -4,4 +4,4 @@ using Restaurants.Domain.Common.Results;
 
 namespace Restaurants.Application.Dishes.Query.GetByIdForRestaurant;
 
-public record GetByIdForRestaurantQuery(int RestaurantId, int Id) : IRequest<Result<DishDto>>;
+public record GetDishByIdForRestaurantQuery(int RestaurantId, int Id) : IRequest<Result<DishDto>>;

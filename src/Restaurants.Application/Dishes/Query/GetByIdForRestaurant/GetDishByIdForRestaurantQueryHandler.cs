@@ -8,10 +8,10 @@ using Restaurants.Domain.Entities.Restaurants;
 
 namespace Restaurants.Application.Dishes.Query.GetByIdForRestaurant;
 
-public class GetByIdForRestaurantQueryHandler(ILogger<GetByIdForRestaurantQueryHandler> logger,
-IRestaurantsDbContext dbContext) : IRequestHandler<GetByIdForRestaurantQuery, Result<DishDto>>
+public class GetDishByIdForRestaurantQueryHandler(ILogger<GetDishByIdForRestaurantQueryHandler> logger,
+IRestaurantsDbContext dbContext) : IRequestHandler<GetDishByIdForRestaurantQuery, Result<DishDto>>
 {
-	public async ValueTask<Result<DishDto>> Handle(GetByIdForRestaurantQuery request, CancellationToken ct)
+	public async ValueTask<Result<DishDto>> Handle(GetDishByIdForRestaurantQuery request, CancellationToken ct)
 	{
 		logger.LogInformation(
 			"Get dish with id '{Id}' for restaurant with id '{RestaurantId}'.",

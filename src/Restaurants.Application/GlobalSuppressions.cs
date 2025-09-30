@@ -5,3 +5,5 @@
 using System.Diagnostics.CodeAnalysis;
 
 [assembly: SuppressMessage("MediatorGenerator", "MSG0001:MediatorGenerator multiple handlers", Justification = "<Pending>", Scope = "type", Target = "~T:Restaurants.Application.Restaurants.Queries.GetRestaurantById.GetRestaurantByIdQueryHandler")]
+[assembly: SuppressMessage("MediatorGenerator", "MSG0001:MediatorGenerator multiple handlers", Justification = "<Pending>", Scope = "type", Target = "~T:Restaurants.Application.Restaurants.Queries.Caching.CachedGetAllRestaurantsQueryHandler")]
+[assembly: SuppressMessage("MediatorGenerator", "MSG0001:MediatorGenerator multiple handlers", Justification = "<Pending>", Scope = "type", Target = "~T:Restaurants.Application.Dishes.Query.GetByIdForRestaurant.GetDishByIdForRestaurantQueryHandler")]

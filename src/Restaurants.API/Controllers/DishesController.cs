@@ -19,7 +19,7 @@ public class DishesController(IMediator mediator) : ApiController
 		[FromRoute] int id,
 		CancellationToken ct)
 	{
-		var result = await mediator.Send(new GetByIdForRestaurantQuery(restaurantId, id), ct);
+		var result = await mediator.Send(new GetDishByIdForRestaurantQuery(restaurantId, id), ct);
 
 		return result.Match(Ok, Problem);
 	}
