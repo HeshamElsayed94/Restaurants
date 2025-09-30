@@ -43,8 +43,6 @@ app.UseMiddleware<ValidateTokenSecurityStampMiddleware>();
 
 app.UseAuthorization();
 
-app.UseHttpCacheHeaders();
-
 app.MapGroup("api/identity")
 	.WithTags("Identity")
 	.MapIdentityApi<User>();

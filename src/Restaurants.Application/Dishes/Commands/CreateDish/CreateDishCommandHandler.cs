@@ -1,7 +1,9 @@
 ﻿using Mediator;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Hybrid;
 using Microsoft.Extensions.Logging;
 using Restaurants.Application.Dishes.Extensions;
+using Restaurants.Application.Restaurants.Queries.Caching;
 using Restaurants.Domain.Common.Results;
 using Restaurants.Domain.Constans;
 using Restaurants.Domain.Contracts;
@@ -9,7 +11,8 @@ using Restaurants.Domain.Entities.Restaurants;
 
 namespace Restaurants.Application.Dishes.Commands.CreateDish;
 public class CreateDishCommandHandler(ILogger<CreateDishCommandHandler> logger,
-IRestaurantsDbContext dbContext, IRestaurantAuthorizationService authorizationService) : IRequestHandler<CreateDishCommand, Result<int>>
+IRestaurantsDbContext dbContext, IRestaurantAuthorizationService authorizationService,
+HybridCache cache) : IRequestHandler<CreateDishCommand, Result<int>>
 {
 	public async ValueTask<Result<int>> Handle(CreateDishCommand request, CancellationToken ct)
 	{
@@ -34,6 +37,8 @@ IRestaurantsDbContext dbContext, IRestaurantAuthorizationService authorizationSe
 		await dbContext.Dishes.AddAsync(dish, ct);
 
 		await dbContext.SaveChangesAsync(ct);
+
+		await cache.RemoveByTagAsync(RestaurantCachingTags.Single(request.RestaurantId), ct);
 
 		return dish.Id;
 	}

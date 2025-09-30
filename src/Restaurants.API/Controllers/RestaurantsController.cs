@@ -18,7 +18,7 @@ public class RestaurantsController(IMediator mediator) : ApiController
 	[HttpGet]
 	public async Task<IActionResult> GetAllPaged([FromQuery] GetAllRestaurantsQuery query, CancellationToken ct) => Ok(await mediator.Send(query, ct));
 
-	[HttpCacheIgnore]
+	//[HttpCacheIgnore]
 	[HttpGet("{id}")]
 	public async Task<IActionResult> GetById([FromRoute] int id, CancellationToken ct)
 	{

@@ -1,9 +1,10 @@
 using System.Text.Json.Serialization;
-using Marvin.Cache.Headers;
+using Marvin.Cache.Headers.Interfaces;
 using Mediator;
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.OpenApi.Models;
 using Restaurants.API.Exceptions;
+using Restaurants.API.Filters;
 using Restaurants.Application.Common;
 using Restaurants.Application.Restaurants.Dtos;
 using Restaurants.Application.Restaurants.Queries.Caching;
@@ -48,7 +49,7 @@ public static class DependencyInjection
 			context.ProblemDetails.Extensions.Add("requestId", context.HttpContext.TraceIdentifier);
 		});
 
-		builder.Services.AddControllers()
+		builder.Services.AddControllers(op => op.Filters.Add<HttpHeaderCacheFilter>())
 			.AddJsonOptions(options =>
 			{
 				options.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
@@ -77,18 +78,12 @@ public static class DependencyInjection
 			op.MimeTypes = ["application/json", "application/xml", "text/plain", "text/html"];
 		});
 
-		builder.Services.AddHttpCacheHeaders(op =>
-		{
-			op.CacheLocation = CacheLocation.Public;
-			op.SharedMaxAge = 600;
-		}, vOp => vOp.MustRevalidate = true);
-
 		builder.Services.AddHybridCache(op => op.DefaultEntryOptions = new()
 		{
 			Expiration = TimeSpan.FromMinutes(30),
 			LocalCacheExpiration = TimeSpan.FromMinutes(10),
 		});
-
+		IETagGenerator
 		builder.Services.AddScoped<IRequestHandler<GetAllRestaurantsQuery, PagedList<RestaurantDto>>, GetAllRestaurantsQueryHandler>();
 		builder.Services.Decorate<IRequestHandler<GetAllRestaurantsQuery, PagedList<RestaurantDto>>, CachedGetAllRestaurantsQueryHandler>();
 
