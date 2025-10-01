@@ -33,6 +33,7 @@ public class CreateRestaurantCommandHandler(
 		await dbContext.SaveChangesAsync(ct);
 
 		await cache.RemoveByTagAsync(RestaurantCachingTags.Paged, ct);
+		logger.LogInformation("Cache removed");
 
 		return restaurantEntity.Id;
 	}

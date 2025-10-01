@@ -39,6 +39,7 @@ HybridCache cache) : IRequestHandler<CreateDishCommand, Result<int>>
 		await dbContext.SaveChangesAsync(ct);
 
 		await cache.RemoveByTagAsync(RestaurantCachingTags.Single(request.RestaurantId), ct);
+		logger.LogInformation("Cache removed");
 
 		return dish.Id;
 	}

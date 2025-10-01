@@ -1,5 +1,6 @@
 using Mediator;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Caching.Hybrid;
 using Microsoft.Extensions.Logging;
 using Restaurants.Application.Users.Commands.AssignUserRole;
 using Restaurants.Domain.Common.Results;
@@ -10,10 +11,11 @@ namespace Restaurants.Application.Users.Commands.UnAssignUserRole;
 public class UnAssignUserRoleCommandHandler(
 	ILogger<AssignUserRoleCommandHandler> logger,
 	UserManager<User> userManager,
-	RoleManager<IdentityRole> roleManager) : IRequestHandler<UnAssignUserRoleCommand, Result<Success>>
+	RoleManager<IdentityRole> roleManager,
+	HybridCache cache) : IRequestHandler<UnAssignUserRoleCommand, Result<Success>>
 {
 
-	public async ValueTask<Result<Success>> Handle(UnAssignUserRoleCommand request, CancellationToken cancellationToken)
+	public async ValueTask<Result<Success>> Handle(UnAssignUserRoleCommand request, CancellationToken ct)
 	{
 		logger.LogInformation("UnAssign user role : {request}", request);
 
@@ -43,6 +45,9 @@ public class UnAssignUserRoleCommandHandler(
 			await userManager.AddToRoleAsync(user, request.RoleName);
 			return Error.Failure(description: "Unassigning to role failed due to server error");
 		}
+
+		await cache.RemoveAsync($"Users:{user.Id}", ct);
+		logger.LogInformation("Cache removed");
 
 		return Result.Success;
 	}

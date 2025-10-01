@@ -68,7 +68,9 @@ public static class DependencyInjection
 			.WithScopedLifetime();
 
 			scan.FromAssembliesOf(typeof(Infrastructure.Extensions.DependencyInjection))
-			.AddClasses(false).AsMatchingInterface().WithScopedLifetime();
+			.AddClasses(false)
+			.AsMatchingInterface()
+			.WithScopedLifetime();
 
 		});
 

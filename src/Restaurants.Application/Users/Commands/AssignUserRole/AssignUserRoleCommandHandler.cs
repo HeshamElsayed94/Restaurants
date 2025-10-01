@@ -1,5 +1,6 @@
 using Mediator;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Caching.Hybrid;
 using Microsoft.Extensions.Logging;
 using Restaurants.Domain.Common.Results;
 using Restaurants.Domain.Entities;
@@ -9,10 +10,11 @@ namespace Restaurants.Application.Users.Commands.AssignUserRole;
 public class AssignUserRoleCommandHandler(
 	ILogger<AssignUserRoleCommandHandler> logger,
 	UserManager<User> userManager,
-	RoleManager<IdentityRole> roleManager) : IRequestHandler<AssignUserRoleCommand, Result<Success>>
+	RoleManager<IdentityRole> roleManager,
+	HybridCache cache) : IRequestHandler<AssignUserRoleCommand, Result<Success>>
 {
 
-	public async ValueTask<Result<Success>> Handle(AssignUserRoleCommand request, CancellationToken cancellationToken)
+	public async ValueTask<Result<Success>> Handle(AssignUserRoleCommand request, CancellationToken ct)
 	{
 		logger.LogInformation("Assign user role : {request}", request);
 
@@ -43,6 +45,8 @@ public class AssignUserRoleCommandHandler(
 			return Error.Failure(description: "Assigning to role failed due to server error");
 		}
 
+		await cache.RemoveAsync($"Users:{user.Id}", ct);
+		logger.LogInformation("Cache removed");
 		return Result.Success;
 	}
 }

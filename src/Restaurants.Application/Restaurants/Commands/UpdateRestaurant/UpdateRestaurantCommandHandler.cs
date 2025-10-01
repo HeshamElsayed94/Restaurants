@@ -44,6 +44,7 @@ public class UpdateRestaurantCommandHandler(
 		await dbContext.SaveChangesAsync(ct);
 
 		await cache.RemoveByTagAsync(RestaurantCachingTags.Single(request.Id), ct);
+		logger.LogInformation("Cache removed");
 
 		return Result.Success;
 	}
