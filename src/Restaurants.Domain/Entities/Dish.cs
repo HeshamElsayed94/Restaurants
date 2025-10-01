@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace Restaurants.Domain.Entities;
 
 public class Dish
@@ -13,4 +15,7 @@ public class Dish
 	public int? KiloCalories { get; set; }
 
 	public int RestaurantId { get; set; }
+
+	[Timestamp]
+	public byte[] RowVersion { get; set; } = null!;
 }

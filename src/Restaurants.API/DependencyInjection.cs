@@ -1,9 +1,9 @@
 using System.Text.Json.Serialization;
 using Mediator;
 using Microsoft.AspNetCore.ResponseCompression;
+using Microsoft.Data.SqlClient;
 using Microsoft.OpenApi.Models;
 using Restaurants.API.Exceptions;
-using Restaurants.API.Filters;
 using Restaurants.Application.Common;
 using Restaurants.Application.Dishes.Dtos;
 using Restaurants.Application.Dishes.Query.Caching;
@@ -52,7 +52,7 @@ public static class DependencyInjection
 			context.ProblemDetails.Extensions.Add("requestId", context.HttpContext.TraceIdentifier);
 		});
 
-		builder.Services.AddControllers(op => op.Filters.Add<HttpHeaderCacheFilter>())
+		builder.Services.AddControllers()
 			.AddJsonOptions(options =>
 			{
 				options.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
@@ -82,6 +82,8 @@ public static class DependencyInjection
 			op.Providers.Add<BrotliCompressionProvider>();
 			op.MimeTypes = ["application/json", "application/xml", "text/plain", "text/html"];
 		});
+
+		builder.Services.AddScoped(_ => new SqlConnection(builder.Configuration.GetConnectionString("RestaurantnsDb")));
 
 		builder.Services.AddStackExchangeRedisCache(op =>
 		{

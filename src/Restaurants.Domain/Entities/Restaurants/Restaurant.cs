@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace Restaurants.Domain.Entities.Restaurants;
 
 public class Restaurant
@@ -23,4 +25,7 @@ public class Restaurant
 	public User Owner { get; set; } = null!;
 
 	public string OwnerId { get; set; } = null!;
+
+	[Timestamp]
+	public byte[] RowVersion { get; set; } = null!;
 }

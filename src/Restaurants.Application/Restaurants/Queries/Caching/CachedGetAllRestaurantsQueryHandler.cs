@@ -16,7 +16,7 @@ public class CachedGetAllRestaurantsQueryHandler(
 		logger.LogInformation("Getting restaurants from caching");
 
 		var result = await cache.GetOrCreateAsync(
-		$"Restaurants:{request.PageNumber}:{request.PageSize}",
+		$"Restaurants:{request.PageNumber}:{request.PageSize}:{request.SearchPhrase}:{request.SortBy}:{request.SortDirection}",
 		async ct =>
 		{
 			logger.LogInformation("Cache created");

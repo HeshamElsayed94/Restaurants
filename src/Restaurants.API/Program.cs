@@ -1,3 +1,4 @@
+using Delta;
 using Microsoft.Extensions.Caching.Hybrid;
 using Restaurants.API;
 using Restaurants.API.Middlewares;
@@ -50,6 +51,8 @@ app.UseAuthentication();
 app.UseMiddleware<ValidateTokenSecurityStampMiddleware>();
 
 app.UseAuthorization();
+
+app.UseDelta();
 
 app.MapGroup("api/identity")
 	.WithTags("Identity")
