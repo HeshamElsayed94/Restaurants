@@ -47,6 +47,7 @@ public class AssignUserRoleCommandHandler(
 
 		await cache.RemoveAsync($"Users:{user.Id}", ct);
 		logger.LogInformation("Cache removed");
+
 		return Result.Success;
 	}
 }
