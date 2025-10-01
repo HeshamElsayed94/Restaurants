@@ -3,9 +3,9 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Restaurants.Application.Dishes.Commands.CreateDish;
 using Restaurants.Application.Dishes.Commands.DeleteDishesForRestaurant;
-using Restaurants.Application.Dishes.Dtos;
 using Restaurants.Application.Dishes.Query.GetDishByIdForRestaurant;
 using Restaurants.Application.Dishes.Query.GetDishesForRestaurant;
+using Restaurants.Application.Restaurants.Dtos;
 using Restaurants.Domain.Constans;
 
 namespace Restaurants.API.Controllers;
@@ -14,8 +14,8 @@ namespace Restaurants.API.Controllers;
 public class DishesController(IMediator mediator) : ApiController
 {
 
-	[ProducesResponseType<DishDto>(200)]
-	[ProducesResponseType(400)]
+	[ProducesResponseType<RestaurantDto>(StatusCodes.Status200OK)]
+	[ProducesResponseType<RestaurantDto>(StatusCodes.Status404NotFound)]
 	[HttpGet("{id}")]
 	public async Task<IActionResult> GetByIdForRestaurant(
 			[FromRoute] int restaurantId,
@@ -27,8 +27,8 @@ public class DishesController(IMediator mediator) : ApiController
 		return result.Match(Ok, Problem);
 	}
 
-	[ProducesResponseType<IEnumerable<DishDto>>(200)]
-	[ProducesResponseType(400)]
+	[ProducesResponseType<RestaurantDto>(StatusCodes.Status200OK)]
+	[ProducesResponseType<RestaurantDto>(StatusCodes.Status404NotFound)]
 	[HttpGet]
 	public async Task<IActionResult> GetAllDishesForRestaurant([FromRoute] int restaurantId, CancellationToken ct)
 	{

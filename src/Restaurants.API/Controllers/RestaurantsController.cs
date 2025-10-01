@@ -1,7 +1,6 @@
 using Mediator;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Restaurants.Application.Common;
 using Restaurants.Application.Restaurants.Commands.CreateRestaurant;
 using Restaurants.Application.Restaurants.Commands.DeleteRestaurant;
 using Restaurants.Application.Restaurants.Commands.UpdateRestaurant;
@@ -15,14 +14,14 @@ namespace Restaurants.API.Controllers;
 [Route("api/restaurants")]
 public class RestaurantsController(IMediator mediator) : ApiController
 {
-	[ProducesResponseType<PagedList<RestaurantDto>>(200)]
+	[ProducesResponseType<RestaurantDto>(StatusCodes.Status200OK)]
 	[ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
 	[HttpGet]
 	public async Task<IActionResult> GetAllPaged([FromQuery] GetAllRestaurantsQuery query, CancellationToken ct)
 		=> Ok(await mediator.Send(query, ct));
 
-	[ProducesResponseType<RestaurantDto>(200)]
-	[ProducesResponseType(404)]
+	[ProducesResponseType<RestaurantDto>(StatusCodes.Status200OK)]
+	[ProducesResponseType(StatusCodes.Status404NotFound)]
 	[HttpGet("{id}")]
 	public async Task<IActionResult> GetById([FromRoute] int id, CancellationToken ct)
 	{

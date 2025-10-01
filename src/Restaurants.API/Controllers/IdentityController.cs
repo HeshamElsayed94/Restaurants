@@ -2,7 +2,7 @@ using Mediator;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Restaurants.Application.Contracts;
-using Restaurants.Application.Users;
+using Restaurants.Application.Restaurants.Dtos;
 using Restaurants.Application.Users.Commands.AssignUserRole;
 using Restaurants.Application.Users.Commands.LogOutFromAllDevices;
 using Restaurants.Application.Users.Commands.UnAssignUserRole;
@@ -13,7 +13,7 @@ namespace Restaurants.API.Controllers;
 [Route("api/identity")]
 public class IdentityController(IUserContext userContext, IMediator mediator) : ApiController
 {
-	[ProducesResponseType<CurrentUser>(200)]
+	[ProducesResponseType<RestaurantDto>(StatusCodes.Status200OK)]
 	[ProducesResponseType(StatusCodes.Status401Unauthorized)]
 	[Authorize]
 	[HttpGet("Profile")]

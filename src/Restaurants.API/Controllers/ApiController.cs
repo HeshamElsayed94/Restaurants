@@ -4,6 +4,7 @@ using Restaurants.Domain.Common.Results;
 
 namespace Restaurants.API.Controllers;
 [ApiController]
+[Produces("application/json")]
 public class ApiController : ControllerBase
 {
 	protected ActionResult Problem(List<Error> errors)
