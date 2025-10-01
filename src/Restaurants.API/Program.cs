@@ -1,6 +1,8 @@
+using Microsoft.Extensions.Caching.Hybrid;
 using Restaurants.API;
 using Restaurants.API.Middlewares;
 using Restaurants.Application.Extensions;
+using Restaurants.Application.Restaurants.Queries.Caching;
 using Restaurants.Domain.Entities;
 using Restaurants.Infrastructure.Extensions;
 using Restaurants.Infrastructure.Seeders;
@@ -31,8 +33,14 @@ else
 }
 
 using var scope = app.Services.CreateScope();
-await scope.ServiceProvider.GetRequiredService<IRestaurantSeeder>().Seed();
+{
+	await scope.ServiceProvider.GetRequiredService<IRestaurantSeeder>().Seed();
+	var cache = scope.ServiceProvider.GetRequiredService<HybridCache>();
 
+	await cache.RemoveByTagAsync([RestaurantCachingTags.Main, "Users"]);
+	var logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
+	logger.LogInformation("All cache removed");
+}
 app.UseSerilogRequestLogging();
 
 app.UseResponseCompression();

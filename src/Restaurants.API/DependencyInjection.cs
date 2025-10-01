@@ -83,10 +83,16 @@ public static class DependencyInjection
 			op.MimeTypes = ["application/json", "application/xml", "text/plain", "text/html"];
 		});
 
+		builder.Services.AddStackExchangeRedisCache(op =>
+		{
+			op.Configuration = Environment.GetEnvironmentVariable("Redis");
+			op.InstanceName = "RestaurantsCaching";
+		});
+
 		builder.Services.AddHybridCache(op => op.DefaultEntryOptions = new()
 		{
-			Expiration = TimeSpan.FromMinutes(30),
-			LocalCacheExpiration = TimeSpan.FromMinutes(10),
+			Expiration = TimeSpan.FromMinutes(15),
+			LocalCacheExpiration = TimeSpan.FromMinutes(5),
 		});
 
 		builder.Services.AddScoped<IRequestHandler<GetAllRestaurantsQuery, PagedList<RestaurantDto>>, GetAllRestaurantsQueryHandler>();
