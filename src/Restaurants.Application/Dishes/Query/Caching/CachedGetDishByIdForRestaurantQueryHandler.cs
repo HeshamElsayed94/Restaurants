@@ -18,7 +18,6 @@ IRequestHandler<GetDishByIdForRestaurantQuery, Result<DishDto>> handler)
 			"Get dish with id '{Id}' for restaurant with id '{RestaurantId}' from caching.",
 			request.Id,
 			request.RestaurantId);
-		;
 
 		var result = await cache.GetOrCreateAsync(
 		$"Restaurants{request.RestaurantId}:Dishes:{request.Id}",
