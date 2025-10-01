@@ -14,7 +14,7 @@ public readonly record struct Error
 		StatusCode = statusCode;
 	}
 
-	public static Error Failure(string code, string description = "General failure.")
+	public static Error Failure(string code = nameof(Failure), string description = "General failure.")
 		=> new(code, description, HttpStatusCode.InternalServerError);
 
 	public static Error Unexpected(string code = nameof(Unexpected), string description = "Unexpected error.")

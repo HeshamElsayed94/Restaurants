@@ -7,7 +7,7 @@ using Restaurants.API.Filters;
 using Restaurants.Application.Common;
 using Restaurants.Application.Dishes.Dtos;
 using Restaurants.Application.Dishes.Query.Caching;
-using Restaurants.Application.Dishes.Query.GetByIdForRestaurant;
+using Restaurants.Application.Dishes.Query.GetDishByIdForRestaurant;
 using Restaurants.Application.Dishes.Query.GetDishesForRestaurant;
 using Restaurants.Application.Restaurants.Dtos;
 using Restaurants.Application.Restaurants.Queries.Caching;

@@ -1,6 +1,7 @@
 using Mediator;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
+using Restaurants.Domain.Common.Results;
 using Restaurants.Domain.Entities;
 
 namespace Restaurants.Application.Users.Commands.AssignUserRole;
@@ -8,32 +9,40 @@ namespace Restaurants.Application.Users.Commands.AssignUserRole;
 public class AssignUserRoleCommandHandler(
 	ILogger<AssignUserRoleCommandHandler> logger,
 	UserManager<User> userManager,
-	RoleManager<IdentityRole> roleManager) : IRequestHandler<AssignUserRoleCommand, bool>
+	RoleManager<IdentityRole> roleManager) : IRequestHandler<AssignUserRoleCommand, Result<Success>>
 {
 
-	public async ValueTask<bool> Handle(AssignUserRoleCommand request, CancellationToken cancellationToken)
+	public async ValueTask<Result<Success>> Handle(AssignUserRoleCommand request, CancellationToken cancellationToken)
 	{
 		logger.LogInformation("Assign user role : {request}", request);
 
 		var user = await userManager.FindByEmailAsync(request.UserEmail);
 
 		if (user is null)
-			return false;
+		{
+			logger.LogWarning("User with email {UserEmail} not found.", request.UserEmail);
+			return Error.NotFound(description: $"User with email {request.UserEmail} not found.");
+		}
 
-		user.SecurityStamp = Guid.NewGuid().ToString();
-
-		var securityStampUpdated = await userManager.UpdateAsync(user);
-
-		if (!securityStampUpdated.Succeeded)
-			return false;
-
-		var roleExists = await roleManager.RoleExistsAsync(request.RoleName);
+		bool roleExists = await roleManager.RoleExistsAsync(request.RoleName);
 
 		if (!roleExists)
-			return false;
+		{
+			logger.LogWarning("Role {RoleName} not found.", request.RoleName);
+			return Error.NotFound(description: $"Role {request.RoleName} not found.");
+		}
 
 		await userManager.AddToRoleAsync(user, request.RoleName);
 
-		return true;
+		var securityStampUpdated = await userManager.UpdateSecurityStampAsync(user);
+
+		if (!securityStampUpdated.Succeeded)
+		{
+			logger.LogError("Update user security stamp failed.");
+			await userManager.RemoveFromRoleAsync(user, request.RoleName);
+			return Error.Failure(description: "Assigning to role failed due to server error");
+		}
+
+		return Result.Success;
 	}
 }

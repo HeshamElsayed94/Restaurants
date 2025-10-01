@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Caching.Hybrid;
 using Microsoft.Extensions.Logging;
 using Restaurants.Application.Dishes.Dtos;
-using Restaurants.Application.Dishes.Query.GetByIdForRestaurant;
+using Restaurants.Application.Dishes.Query.GetDishByIdForRestaurant;
 using Restaurants.Application.Restaurants.Queries.Caching;
 using Restaurants.Domain.Common.Results;
 

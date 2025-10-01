@@ -6,7 +6,7 @@ using Restaurants.Domain.Common.Results;
 using Restaurants.Domain.Contracts;
 using Restaurants.Domain.Entities.Restaurants;
 
-namespace Restaurants.Application.Dishes.Query.GetByIdForRestaurant;
+namespace Restaurants.Application.Dishes.Query.GetDishByIdForRestaurant;
 
 public class GetDishByIdForRestaurantQueryHandler(ILogger<GetDishByIdForRestaurantQueryHandler> logger,
 IRestaurantsDbContext dbContext) : IRequestHandler<GetDishByIdForRestaurantQuery, Result<DishDto>>
