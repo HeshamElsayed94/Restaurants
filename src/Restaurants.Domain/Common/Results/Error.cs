@@ -1,4 +1,5 @@
 ﻿using System.Net;
+using System.Text.Json.Serialization;
 
 namespace Restaurants.Domain.Common.Results;
 public readonly record struct Error
@@ -7,6 +8,7 @@ public readonly record struct Error
 	public string Description { get; }
 	public HttpStatusCode StatusCode { get; }
 
+	[JsonConstructor]
 	private Error(string code, string description, HttpStatusCode statusCode)
 	{
 		Code = code;
