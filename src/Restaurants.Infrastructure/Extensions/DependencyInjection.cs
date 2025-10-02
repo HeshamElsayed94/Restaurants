@@ -16,7 +16,7 @@ public static class DependencyInjection
 
 		services.AddDbContext<RestaurantsDbContext>(op =>
 		{
-			op.UseSqlServer(configuration.GetConnectionString("RestaurantnsDb"));
+			op.UseSqlServer(configuration.GetConnectionString("RestaurantsDb"));
 			op.EnableSensitiveDataLogging();
 		});
 

@@ -31,14 +31,17 @@ if (!app.Environment.IsDevelopment())
 	app.UseHsts();
 }
 
-using var scope = app.Services.CreateScope();
+using (var scope = app.Services.CreateScope())
 {
-	await scope.ServiceProvider.GetRequiredService<IRestaurantSeeder>().Seed();
-	var cache = scope.ServiceProvider.GetRequiredService<HybridCache>();
+	var seeder = scope.ServiceProvider.GetRequiredService<IRestaurantSeeder>();
+	await seeder.Seed();
 
+	var cache = scope.ServiceProvider.GetRequiredService<HybridCache>();
 	await cache.RemoveByTagAsync([RestaurantCachingTags.Main, "Users"]);
+
 	var logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
 	logger.LogInformation("All cache removed");
+
 }
 
 app.UseSerilogRequestLogging();
