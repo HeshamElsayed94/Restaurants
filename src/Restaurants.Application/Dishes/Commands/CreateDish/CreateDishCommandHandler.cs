@@ -10,7 +10,7 @@ using Restaurants.Domain.Contracts;
 using Restaurants.Domain.Entities.Restaurants;
 
 namespace Restaurants.Application.Dishes.Commands.CreateDish;
-public class CreateDishCommandHandler(ILogger<CreateDishCommandHandler> logger,
+internal class CreateDishCommandHandler(ILogger<CreateDishCommandHandler> logger,
 IRestaurantsDbContext dbContext, IRestaurantAuthorizationService authorizationService,
 HybridCache cache) : IRequestHandler<CreateDishCommand, Result<int>>
 {

@@ -1,19 +1,8 @@
 using System.Text.Json.Serialization;
-using Mediator;
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.Data.SqlClient;
 using Microsoft.OpenApi.Models;
 using Restaurants.API.Exceptions;
-using Restaurants.Application.Common;
-using Restaurants.Application.Dishes.Dtos;
-using Restaurants.Application.Dishes.Query.Caching;
-using Restaurants.Application.Dishes.Query.GetDishByIdForRestaurant;
-using Restaurants.Application.Dishes.Query.GetDishesForRestaurant;
-using Restaurants.Application.Restaurants.Dtos;
-using Restaurants.Application.Restaurants.Queries.Caching;
-using Restaurants.Application.Restaurants.Queries.GetAllRestaurants;
-using Restaurants.Application.Restaurants.Queries.GetRestaurantById;
-using Restaurants.Domain.Common.Results;
 using Serilog;
 
 namespace Restaurants.API;
@@ -60,20 +49,6 @@ public static class DependencyInjection
 				options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
 			});
 
-		builder.Services.Scan(scan =>
-		{
-			scan.FromAssembliesOf(typeof(Application.Extensions.DependencyInjection))
-			.AddClasses()
-			.AsMatchingInterface()
-			.WithScopedLifetime();
-
-			scan.FromAssembliesOf(typeof(Infrastructure.Extensions.DependencyInjection))
-			.AddClasses(false)
-			.AsMatchingInterface()
-			.WithScopedLifetime();
-
-		});
-
 		builder.Services.AddEndpointsApiExplorer();
 
 		builder.Services.AddResponseCompression(op =>
@@ -97,16 +72,5 @@ public static class DependencyInjection
 			LocalCacheExpiration = TimeSpan.FromMinutes(5),
 		});
 
-		builder.Services.AddScoped<IRequestHandler<GetAllRestaurantsQuery, PagedList<RestaurantDto>>, GetAllRestaurantsQueryHandler>();
-		builder.Services.Decorate<IRequestHandler<GetAllRestaurantsQuery, PagedList<RestaurantDto>>, CachedGetAllRestaurantsQueryHandler>();
-
-		builder.Services.AddScoped<IRequestHandler<GetRestaurantByIdQuery, Result<RestaurantDto>>, GetRestaurantByIdQueryHandler>();
-		builder.Services.Decorate<IRequestHandler<GetRestaurantByIdQuery, Result<RestaurantDto>>, CachedGetRestaurantByIdQueryHandler>();
-
-		builder.Services.AddScoped<IRequestHandler<GetDishByIdForRestaurantQuery, Result<DishDto>>, GetDishByIdForRestaurantQueryHandler>();
-		builder.Services.Decorate<IRequestHandler<GetDishByIdForRestaurantQuery, Result<DishDto>>, CachedGetDishByIdForRestaurantQueryHandler>();
-
-		builder.Services.AddScoped<IRequestHandler<GetDishesForRestaurantQuery, Result<IEnumerable<DishDto>>>, GetDishesForRestaurantQueryHandler>();
-		builder.Services.Decorate<IRequestHandler<GetDishesForRestaurantQuery, Result<IEnumerable<DishDto>>>, CachedGetDishesForRestaurantQueryHandler>();
 	}
 }

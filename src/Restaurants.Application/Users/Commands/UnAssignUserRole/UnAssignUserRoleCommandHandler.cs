@@ -8,7 +8,7 @@ using Restaurants.Domain.Entities;
 
 namespace Restaurants.Application.Users.Commands.UnAssignUserRole;
 
-public class UnAssignUserRoleCommandHandler(
+internal class UnAssignUserRoleCommandHandler(
 	ILogger<AssignUserRoleCommandHandler> logger,
 	UserManager<User> userManager,
 	RoleManager<IdentityRole> roleManager,

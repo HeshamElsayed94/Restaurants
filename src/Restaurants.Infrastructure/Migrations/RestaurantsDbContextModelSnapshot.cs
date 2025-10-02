@@ -175,6 +175,7 @@ namespace Restaurants.Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Price")
+                        .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("RestaurantId")
@@ -384,12 +385,14 @@ namespace Restaurants.Infrastructure.Migrations
                                 .HasColumnType("int");
 
                             b1.Property<string>("City")
+                                .IsRequired()
                                 .HasColumnType("nvarchar(max)");
 
                             b1.Property<string>("PostalCode")
                                 .HasColumnType("nvarchar(max)");
 
                             b1.Property<string>("Street")
+                                .IsRequired()
                                 .HasColumnType("nvarchar(max)");
 
                             b1.HasKey("RestaurantId");

@@ -6,7 +6,7 @@ using Restaurants.Application.Restaurants.Dtos;
 using Restaurants.Application.Restaurants.Queries.GetAllRestaurants;
 
 namespace Restaurants.Application.Restaurants.Queries.Caching;
-public class CachedGetAllRestaurantsQueryHandler(
+internal class CachedGetAllRestaurantsQueryHandler(
 	IRequestHandler<GetAllRestaurantsQuery, PagedList<RestaurantDto>> requestHandler,
 	ILogger<CachedGetAllRestaurantsQueryHandler> logger,
 	HybridCache cache) : IRequestHandler<GetAllRestaurantsQuery, PagedList<RestaurantDto>>

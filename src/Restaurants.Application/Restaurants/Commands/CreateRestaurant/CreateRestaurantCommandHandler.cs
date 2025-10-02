@@ -9,7 +9,7 @@ using Restaurants.Domain.Contracts;
 
 namespace Restaurants.Application.Restaurants.Commands.CreateRestaurant;
 
-public class CreateRestaurantCommandHandler(
+internal class CreateRestaurantCommandHandler(
 	ILogger<CreateRestaurantCommandHandler> logger,
 	IRestaurantsDbContext dbContext,
 	IHttpContextAccessor httpAcessor,

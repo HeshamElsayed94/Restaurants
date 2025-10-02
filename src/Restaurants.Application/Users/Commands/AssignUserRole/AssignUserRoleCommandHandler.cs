@@ -7,7 +7,7 @@ using Restaurants.Domain.Entities;
 
 namespace Restaurants.Application.Users.Commands.AssignUserRole;
 
-public class AssignUserRoleCommandHandler(
+internal class AssignUserRoleCommandHandler(
 	ILogger<AssignUserRoleCommandHandler> logger,
 	UserManager<User> userManager,
 	RoleManager<IdentityRole> roleManager,

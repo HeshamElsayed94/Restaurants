@@ -28,3 +28,5 @@ riderModule.iml
 /.idea/.idea.Restaurants/.idea/prettier.xml
 /.idea/.idea.Restaurants/.idea/vcs.xml
 /Restaurants.sln.DotSettings.user
+*/.*
+/.idea

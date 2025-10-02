@@ -33,6 +33,11 @@ public static class DependencyInjection
 			//.AddDefaultPolicy("ValidateToken", policy => policy.AddRequirements(new ValidSecurityStampRequirements()))
 			.AddPolicy(UserRoles.Admin, policy => policy.RequireRole("Admin"));
 
+		services.Scan(scan => scan.FromAssembliesOf(typeof(Infrastructure.Extensions.DependencyInjection))
+						.AddClasses(false)
+						.AsMatchingInterface()
+						.WithScopedLifetime());
+
 		return services;
 	}
 }

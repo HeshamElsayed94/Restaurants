@@ -10,7 +10,7 @@ using Restaurants.Domain.Entities.Restaurants;
 
 namespace Restaurants.Application.Dishes.Commands.DeleteDishesForRestaurant;
 
-public class DeleteDishesForRestaurantCommandHandler(ILogger<DeleteDishesForRestaurantCommandHandler> logger,
+internal class DeleteDishesForRestaurantCommandHandler(ILogger<DeleteDishesForRestaurantCommandHandler> logger,
 IRestaurantsDbContext dbContext,
 IRestaurantAuthorizationService authorizationService,
 HybridCache cache) : IRequestHandler<DeleteDishesForRestaurantCommand, Result<Success>>

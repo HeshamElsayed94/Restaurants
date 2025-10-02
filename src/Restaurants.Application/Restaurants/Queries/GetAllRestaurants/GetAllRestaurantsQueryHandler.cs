@@ -9,7 +9,7 @@ using Restaurants.Domain.Entities.Restaurants;
 
 namespace Restaurants.Application.Restaurants.Queries.GetAllRestaurants;
 
-public class GetAllRestaurantsQueryHandler(IRestaurantsDbContext dbContext, ILogger<GetAllRestaurantsQueryHandler> logger)
+internal class GetAllRestaurantsQueryHandler(IRestaurantsDbContext dbContext, ILogger<GetAllRestaurantsQueryHandler> logger)
 	: IRequestHandler<GetAllRestaurantsQuery, PagedList<RestaurantDto>>
 {
 	public async ValueTask<PagedList<RestaurantDto>> Handle(

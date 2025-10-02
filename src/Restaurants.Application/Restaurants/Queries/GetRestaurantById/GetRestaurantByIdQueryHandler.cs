@@ -8,7 +8,7 @@ using Restaurants.Domain.Entities.Restaurants;
 
 namespace Restaurants.Application.Restaurants.Queries.GetRestaurantById;
 
-public class GetRestaurantByIdQueryHandler(IRestaurantsDbContext dbContext, ILogger<GetRestaurantByIdQueryHandler> logger)
+internal class GetRestaurantByIdQueryHandler(IRestaurantsDbContext dbContext, ILogger<GetRestaurantByIdQueryHandler> logger)
 	: IRequestHandler<GetRestaurantByIdQuery, Result<RestaurantDto>>
 {
 

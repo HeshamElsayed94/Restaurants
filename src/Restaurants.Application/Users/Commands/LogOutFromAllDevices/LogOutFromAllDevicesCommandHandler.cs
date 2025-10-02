@@ -7,7 +7,7 @@ using Restaurants.Domain.Common.Results;
 using Restaurants.Domain.Entities;
 
 namespace Restaurants.Application.Users.Commands.LogOutFromAllDevices;
-public class LogOutFromAllDevicesCommandHandler(
+internal class LogOutFromAllDevicesCommandHandler(
 	ILogger<LogOutFromAllDevicesCommandHandler> logger,
 	IUserContext userContext,
 	UserManager<User> userManager,

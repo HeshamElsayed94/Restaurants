@@ -10,7 +10,7 @@ using Restaurants.Domain.Entities.Restaurants;
 
 namespace Restaurants.Application.Restaurants.Commands.DeleteRestaurant;
 
-public class DeleteRestaurantCommandHandler(
+internal class DeleteRestaurantCommandHandler(
 	IRestaurantsDbContext dbContext,
 	ILogger<DeleteRestaurantCommandHandler> logger,
 	IRestaurantAuthorizationService restaurantAuthorization,

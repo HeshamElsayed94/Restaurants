@@ -8,7 +8,7 @@ using Restaurants.Domain.Entities.Restaurants;
 
 namespace Restaurants.Application.Dishes.Query.GetDishesForRestaurant;
 
-public class GetDishesForRestaurantQueryHandler(ILogger<GetDishesForRestaurantQueryHandler> logger,
+internal class GetDishesForRestaurantQueryHandler(ILogger<GetDishesForRestaurantQueryHandler> logger,
 IRestaurantsDbContext dbContext) : IRequestHandler<GetDishesForRestaurantQuery, Result<IEnumerable<DishDto>>>
 {
 	public async ValueTask<Result<IEnumerable<DishDto>>> Handle(GetDishesForRestaurantQuery request, CancellationToken ct)

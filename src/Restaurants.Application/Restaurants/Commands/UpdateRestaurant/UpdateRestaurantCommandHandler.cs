@@ -11,7 +11,7 @@ using Restaurants.Domain.Entities.Restaurants;
 
 namespace Restaurants.Application.Restaurants.Commands.UpdateRestaurant;
 
-public class UpdateRestaurantCommandHandler(
+internal class UpdateRestaurantCommandHandler(
 	ILogger<UpdateRestaurantCommandHandler> logger,
 	IRestaurantsDbContext dbContext,
 	IUserContext userContext,

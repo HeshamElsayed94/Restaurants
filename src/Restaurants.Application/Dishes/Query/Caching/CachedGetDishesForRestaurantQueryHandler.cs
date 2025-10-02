@@ -7,7 +7,7 @@ using Restaurants.Application.Restaurants.Queries.Caching;
 using Restaurants.Domain.Common.Results;
 
 namespace Restaurants.Application.Dishes.Query.Caching;
-public class CachedGetDishesForRestaurantQueryHandler(ILogger<CachedGetDishesForRestaurantQueryHandler> logger,
+internal class CachedGetDishesForRestaurantQueryHandler(ILogger<CachedGetDishesForRestaurantQueryHandler> logger,
 IRequestHandler<GetDishesForRestaurantQuery, Result<IEnumerable<DishDto>>> handler,
 HybridCache cache) : IRequestHandler<GetDishesForRestaurantQuery, Result<IEnumerable<DishDto>>>
 {
