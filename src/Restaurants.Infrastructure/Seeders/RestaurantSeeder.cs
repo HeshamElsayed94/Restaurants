@@ -1,34 +1,85 @@
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Restaurants.Domain.Constans;
+using Restaurants.Domain.Entities;
 using Restaurants.Domain.Entities.Restaurants;
 using Restaurants.Infrastructure.Persistence;
 
 namespace Restaurants.Infrastructure.Seeders;
 
-internal class RestaurantSeeder(RestaurantsDbContext dbContext) : IRestaurantSeeder
+internal class RestaurantSeeder(RestaurantsDbContext dbContext, UserManager<User> userManager)
+: IRestaurantSeeder
 {
 	public async Task Seed()
 	{
 		if (await dbContext.Database.CanConnectAsync())
 		{
-			if (!dbContext.Restaurants.Any())
+			await dbContext.Database.MigrateAsync();
+
+			await SeedRoles();
+
+			if (await userManager.GetUsersInRoleAsync(UserRoles.Admin) is { Count: 0 })
 			{
-				var restaurant = GetRestaurants();
-				await dbContext.Restaurants.AddRangeAsync(restaurant);
+				string? adminEmail = Environment.GetEnvironmentVariable("Admin__Email");
+				string? adminPassword = Environment.GetEnvironmentVariable("Admin__Password");
+
+				var admin = new User() { Email = adminEmail, UserName = adminEmail };
+
+				await userManager.CreateAsync(admin, adminPassword!);
+				await userManager.AddToRoleAsync(admin, UserRoles.Admin);
 			}
 
-			if (!dbContext.Roles.Any())
+			if (!dbContext.Restaurants.Any())
 			{
-				var role = GetRoles();
-				await dbContext.Roles.AddRangeAsync(role);
+				User? owner = null;
+
+				if (!dbContext.Users.Any())
+				{
+
+					owner = new User()
+					{
+						Id = "d4d8e926-9242-4c00-aa32-8c24d8c95231",
+						Email = "Owner@test.com",
+						UserName = "Owner@test.com"
+					};
+
+					await userManager.CreateAsync(owner, "Owner@229");
+					await userManager.AddToRoleAsync(owner, UserRoles.Owner);
+				}
+				else
+				{
+					var owners = await userManager.GetUsersInRoleAsync(UserRoles.Owner);
+					owner = owners.FirstOrDefault();
+				}
+
+				if (owner is not null)
+				{
+					var restaurant = GetRestaurants(owner.Id);
+					await dbContext.Restaurants.AddRangeAsync(restaurant);
+				}
+
 			}
 
 			await dbContext.SaveChangesAsync();
 		}
 	}
 
-	private IEnumerable<IdentityRole> GetRoles() =>
-	[
+	private async Task SeedRoles()
+	{
+		var existingRoleNames = await dbContext.Roles
+						.Select(r => r.Name)
+						.ToListAsync();
+
+		var missingRoles = GetRoles()
+			.Where(r => !existingRoleNames.Contains(r.Name))
+			.ToList();
+
+		if (missingRoles.Count != 0)
+			await dbContext.Roles.AddRangeAsync(missingRoles);
+	}
+
+	private static IEnumerable<IdentityRole> GetRoles()
+	=> [
 		new(UserRoles.User)
 		{
 			NormalizedName = UserRoles.User.ToUpper()
@@ -44,14 +95,14 @@ internal class RestaurantSeeder(RestaurantsDbContext dbContext) : IRestaurantSee
 
 	];
 
-	private List<Restaurant> GetRestaurants() =>
-	[
+	private static List<Restaurant> GetRestaurants(string ownerId) => [
 		new()
 		{
 			Name = "KFC",
 			Category = "Fast Food",
 			Description = "KFC is an American fast food restaurant.",
 			ContactEmail = "contact@kfc.com",
+			OwnerId = ownerId,
 			HasDelivery = true,
 			Dishes =
 			[

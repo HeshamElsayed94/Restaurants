@@ -62,7 +62,7 @@ public static class DependencyInjection
 
 		builder.Services.AddStackExchangeRedisCache(op =>
 		{
-			op.Configuration = Environment.GetEnvironmentVariable("Redis");
+			op.Configuration = builder.Configuration.GetConnectionString("Redis");
 			op.InstanceName = "RestaurantsCaching";
 		});
 
