@@ -23,12 +23,10 @@ app.UseExceptionHandler();
 
 app.UseHttpsRedirection();
 
-if (app.Environment.IsDevelopment())
-{
-	app.UseSwagger();
-	app.UseSwaggerUI();
-}
-else
+app.UseSwagger();
+app.UseSwaggerUI();
+
+if (!app.Environment.IsDevelopment())
 {
 	app.UseHsts();
 }
@@ -42,6 +40,7 @@ using var scope = app.Services.CreateScope();
 	var logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
 	logger.LogInformation("All cache removed");
 }
+
 app.UseSerilogRequestLogging();
 
 app.UseResponseCompression();
