@@ -58,7 +58,7 @@ public static class DependencyInjection
 			op.MimeTypes = ["application/json", "application/xml", "text/plain", "text/html"];
 		});
 
-		builder.Services.AddScoped(_ => new SqlConnection(builder.Configuration.GetConnectionString("RestaurantnsDb")));
+		builder.Services.AddScoped(_ => new SqlConnection(builder.Configuration.GetConnectionString("RestaurantsDb")));
 
 		builder.Services.AddStackExchangeRedisCache(op =>
 		{

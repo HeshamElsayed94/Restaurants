@@ -33,12 +33,16 @@ public static class DependencyInjection
 			.AsMatchingInterface()
 			.WithScopedLifetime());
 
+		services.AddScoped<IRequestHandler<GetAllRestaurantsQuery, PagedList<RestaurantDto>>, GetAllRestaurantsQueryHandler>();
 		services.Decorate<IRequestHandler<GetAllRestaurantsQuery, PagedList<RestaurantDto>>, CachedGetAllRestaurantsQueryHandler>();
 
+		services.AddScoped<IRequestHandler<GetRestaurantByIdQuery, Result<RestaurantDto>>, GetRestaurantByIdQueryHandler>();
 		services.Decorate<IRequestHandler<GetRestaurantByIdQuery, Result<RestaurantDto>>, CachedGetRestaurantByIdQueryHandler>();
 
+		services.AddScoped<IRequestHandler<GetDishByIdForRestaurantQuery, Result<DishDto>>, GetDishByIdForRestaurantQueryHandler>();
 		services.Decorate<IRequestHandler<GetDishByIdForRestaurantQuery, Result<DishDto>>, CachedGetDishByIdForRestaurantQueryHandler>();
 
+		services.AddScoped<IRequestHandler<GetDishesForRestaurantQuery, Result<IEnumerable<DishDto>>>, GetDishesForRestaurantQueryHandler>();
 		services.Decorate<IRequestHandler<GetDishesForRestaurantQuery, Result<IEnumerable<DishDto>>>, CachedGetDishesForRestaurantQueryHandler>();
 
 		return services;
