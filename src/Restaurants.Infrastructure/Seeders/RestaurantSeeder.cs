@@ -32,8 +32,9 @@ internal class RestaurantSeeder(RestaurantsDbContext dbContext, UserManager<User
 			if (!dbContext.Restaurants.Any())
 			{
 				User? owner = null;
+				var owners = await userManager.GetUsersInRoleAsync(UserRoles.Owner);
 
-				if (!dbContext.Users.Any())
+				if (owners.Count == 0)
 				{
 
 					owner = new User()
@@ -48,7 +49,6 @@ internal class RestaurantSeeder(RestaurantsDbContext dbContext, UserManager<User
 				}
 				else
 				{
-					var owners = await userManager.GetUsersInRoleAsync(UserRoles.Owner);
 					owner = owners.FirstOrDefault();
 				}
 
