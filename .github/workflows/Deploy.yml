@@ -1,9 +1,8 @@
 name: Build and Deploy ASP.Net Core App
 
 env:
-  PACKAGE_PATH: '.'
-  DOTNET_VERSION: '9'                   # .NET version
-  DEPLOY_PROFILE_SECRET: 'MONSTERASP_PUBLISH_PROFILE'  # اسم الـ secret اللي هتحطه في GitHub
+  DOTNET_VERSION: '9'                                # .NET version
+  DEPLOY_PROFILE_SECRET: 'MONSTERASP_PUBLISH_PROFILE' # اسم الـ secret اللي هتحطه في GitHub
 
 on:
   push:
@@ -11,7 +10,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
@@ -34,34 +33,15 @@ jobs:
       - name: Restore dependencies
         run: dotnet restore
 
-      - name: Build solution
-        run: dotnet build --configuration Release --no-restore
+      - name: Build project
+        run: dotnet build ./src/Restaurants.API/Restaurants.API.csproj -c Release --no-restore
 
-      - name: Publish application locally
-        run: dotnet publish -c Release -o ./publish
-
-      - name: Upload artifact for deployment
-        uses: actions/upload-artifact@v4
-        with:
-          name: dotnet-app
-          path: ./publish
-
-  deploy:
-    runs-on: ubuntu-latest
-    needs: build
-  
-    steps:
-      - name: Download build artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: dotnet-app
-          path: ./publish
-  
       - name: Create publish profile from secret
         run: echo "${{ secrets.MONSTERASP_PUBLISH_PROFILE }}" > ./publishprofile.pubxml
-  
-      - name: Deploy to MonsterASP using publish profile
+
+      - name: Publish and Deploy to MonsterASP
         run: |
-          dotnet msbuild ./publishprofile.pubxml /p:DeployOnBuild=true /p:PublishProfile=./publishprofile.pubxml
-
-
+          dotnet publish ./src/Restaurants.API/Restaurants.API.csproj \
+            -c Release \
+            -p:PublishProfile=./publishprofile.pubxml \
+            -p:AllowUntrustedCertificate=true
