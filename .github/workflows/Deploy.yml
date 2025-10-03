@@ -2,11 +2,8 @@ name: Build and Deploy ASP.Net Core App
 
 env:
   PACKAGE_PATH: '.'
-  DOTNET_VERSION: '9'      # .NET version
-  DEPLOY_HOST: ${{ secrets.MONSTERASP_HOST }}   # MonsterASP host
-  DEPLOY_USER: ${{ secrets.MONSTERASP_USER }}   # MonsterASP username
-  DEPLOY_PASS: ${{ secrets.MONSTERASP_PASS }}   # MonsterASP password
-  DEPLOY_PATH: '/wwwroot/'                        # Deployment path on server
+  DOTNET_VERSION: '9'                   # .NET version
+  DEPLOY_PROFILE_SECRET: 'MONSTERASP_PUBLISH_PROFILE'  # اسم الـ secret اللي هتحطه في GitHub
 
 on:
   push:
@@ -40,14 +37,14 @@ jobs:
       - name: Build solution
         run: dotnet build --configuration Release --no-restore
 
-      - name: Publish application
-        run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/api
+      - name: Publish application locally
+        run: dotnet publish -c Release -o ./publish
 
       - name: Upload artifact for deployment
         uses: actions/upload-artifact@v4
         with:
           name: dotnet-app
-          path: ${{env.DOTNET_ROOT}}/api
+          path: ./publish
 
   deploy:
     runs-on: ubuntu-latest
@@ -58,14 +55,15 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: dotnet-app
-          path: ./dotnet-app
+          path: ./publish
 
-      - name: Deploy to MonsterASP via FTP
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.6
-        with:
-          server: ${{ env.DEPLOY_HOST }}
-          username: ${{ env.DEPLOY_USER }}
-          password: ${{ env.DEPLOY_PASS }}
-          local-dir: ./dotnet-app/
-          server-dir: ${{ env.DEPLOY_PATH }}
-          git-ftp-args: "--insecure" # optional if self-signed SSL
+      - name: Create publish profile from secret
+        run: echo "${{ secrets.MONSTERASP_PUBLISH_PROFILE }}" > ./publishprofile.pubxml
+
+      - name: Deploy to MonsterASP using publish profile
+        run: |
+          dotnet publish ./YourProject.csproj \
+            -c Release \
+            -o ./publish \
+            /p:PublishProfile=./publishprofile.pubxml \
+            /p:AllowUntrustedCertificate=true
