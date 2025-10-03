@@ -14,14 +14,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # 1️⃣ Checkout code
       - name: Checkout code
         uses: actions/checkout@v4
 
+      # 2️⃣ Setup .NET
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
 
+      # 3️⃣ Cache NuGet packages
       - name: Cache NuGet packages
         uses: actions/cache@v3
         with:
@@ -30,18 +33,24 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-nuget-
 
+      # 4️⃣ Restore dependencies
       - name: Restore dependencies
-        run: dotnet restore
+        run: dotnet restore ./src/Restaurants.API/Restaurants.API.csproj
 
+      # 5️⃣ Build project
       - name: Build project
         run: dotnet build ./src/Restaurants.API/Restaurants.API.csproj -c Release --no-restore
 
+      # 6️⃣ Create PublishProfiles folder and save publish profile secret
       - name: Create publish profile from secret
-        run: echo "${{ secrets.MONSTERASP_PUBLISH_PROFILE }}" > ./src/Restaurants.API/publishprofile.pubxml
+        run: |
+          mkdir -p ./src/Restaurants.API/Properties/PublishProfiles
+          echo "${{ secrets.MONSTERASP_PUBLISH_PROFILE }}" > ./src/Restaurants.API/Properties/PublishProfiles/MonsterASP.pubxml
 
+      # 7️⃣ Publish and deploy using publish profile
       - name: Publish and Deploy to MonsterASP
         run: |
           dotnet publish ./src/Restaurants.API/Restaurants.API.csproj \
-          -c Release \
-          -p:PublishProfile=./src/Restaurants.API/publishprofile.pubxml \
-          -p:AllowUntrustedCertificate=true
+            -c Release \
+            -p:PublishProfile=MonsterASP \
+            -p:AllowUntrustedCertificate=true
