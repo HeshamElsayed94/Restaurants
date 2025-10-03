@@ -37,7 +37,7 @@ jobs:
         run: dotnet build ./src/Restaurants.API/Restaurants.API.csproj -c Release --no-restore
 
       - name: Create publish profile from secret
-        run: echo "${{ secrets.MONSTERASP_PUBLISH_PROFILE }}" > ./publishprofile.pubxml
+        run: echo "${{ secrets.MONSTERASP_PUBLISH_PROFILE }}" > ./src/Restaurants.API/publishprofile.pubxml
 
       - name: Publish and Deploy to MonsterASP
         run: |
