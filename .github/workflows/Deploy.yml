@@ -49,22 +49,19 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     needs: build
-
+  
     steps:
       - name: Download build artifact
         uses: actions/download-artifact@v4
         with:
           name: dotnet-app
           path: ./publish
-
+  
       - name: Create publish profile from secret
         run: echo "${{ secrets.MONSTERASP_PUBLISH_PROFILE }}" > ./publishprofile.pubxml
-
+  
       - name: Deploy to MonsterASP using publish profile
         run: |
-         dotnet publish ./src/Restaurants.API/Restaurants.API.csproj \
-          -c Release \
-          -o ./publish \
-          /p:PublishProfile=./publishprofile.pubxml \
-          /p:AllowUntrustedCertificate=true
+          dotnet msbuild ./publishprofile.pubxml /p:DeployOnBuild=true /p:PublishProfile=./publishprofile.pubxml
+
 
