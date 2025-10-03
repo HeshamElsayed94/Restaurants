@@ -30,3 +30,4 @@ riderModule.iml
 /Restaurants.sln.DotSettings.user
 */.*
 /.idea
+/src/Restaurants.API/Properties/PublishProfiles/site38326-WebDeploy.pubxml.user
