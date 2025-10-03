@@ -42,6 +42,6 @@ jobs:
       - name: Publish and Deploy to MonsterASP
         run: |
           dotnet publish ./src/Restaurants.API/Restaurants.API.csproj \
-            -c Release \
-            -p:PublishProfile=./publishprofile.pubxml \
-            -p:AllowUntrustedCertificate=true
+          -c Release \
+          -p:PublishProfile=./src/Restaurants.API/publishprofile.pubxml \
+          -p:AllowUntrustedCertificate=true
