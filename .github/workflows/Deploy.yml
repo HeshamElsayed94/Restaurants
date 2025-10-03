@@ -66,6 +66,6 @@ jobs:
           server: ${{ env.DEPLOY_HOST }}
           username: ${{ env.DEPLOY_USER }}
           password: ${{ env.DEPLOY_PASS }}
-          local-dir: ./dotnet-app
+          local-dir: ./dotnet-app/
           server-dir: ${{ env.DEPLOY_PATH }}
           git-ftp-args: "--insecure" # optional if self-signed SSL
