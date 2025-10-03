@@ -6,7 +6,7 @@ env:
   DEPLOY_HOST: ${{ secrets.MONSTERASP_HOST }}   # MonsterASP host
   DEPLOY_USER: ${{ secrets.MONSTERASP_USER }}   # MonsterASP username
   DEPLOY_PASS: ${{ secrets.MONSTERASP_PASS }}   # MonsterASP password
-  DEPLOY_PATH: '/wwwroot'                        # Deployment path on server
+  DEPLOY_PATH: '/wwwroot/'                        # Deployment path on server
 
 on:
   push:
