@@ -3,6 +3,7 @@ using Mediator;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Caching.Hybrid;
 using Microsoft.Extensions.Logging;
+using Restaurants.Application.Contracts;
 using Restaurants.Application.Restaurants.Queries.Caching;
 using Restaurants.Domain.Common.Results;
 using Restaurants.Domain.Contracts;

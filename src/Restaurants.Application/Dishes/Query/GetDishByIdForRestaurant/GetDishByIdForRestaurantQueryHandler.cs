@@ -1,6 +1,7 @@
 ﻿using Mediator;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using Restaurants.Application.Contracts;
 using Restaurants.Application.Dishes.Dtos;
 using Restaurants.Domain.Common.Results;
 using Restaurants.Domain.Contracts;
