@@ -41,7 +41,7 @@ jobs:
       - name: Build project
         run: dotnet build ./src/Restaurants.API/Restaurants.API.csproj -c Release --no-restore
 
-      # 6️⃣ Create PublishProfiles folder and save publish profile secret
+      # 6️⃣ Create PublishProfiles folder and save publish profile secret (supports multiline)
       - name: Create publish profile from secret
         run: |
           mkdir -p ./src/Restaurants.API/Properties/PublishProfiles
