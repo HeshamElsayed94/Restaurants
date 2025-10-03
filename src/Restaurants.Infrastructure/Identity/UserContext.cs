@@ -1,8 +1,9 @@
 using System.Security.Claims;
 using Microsoft.AspNetCore.Http;
 using Restaurants.Application.Contracts;
+using Restaurants.Application.Users;
 
-namespace Restaurants.Application.Users;
+namespace Restaurants.Infrastructure.Identity;
 
 public class UserContext(IHttpContextAccessor contextAccessor) : IUserContext
 {
