@@ -61,7 +61,7 @@ jobs:
           path: ./dotnet-app
 
       - name: Deploy to MonsterASP via FTP
-        uses: SamKirkland/FTP-Deploy-Action@v4
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.6
         with:
           server: ${{ env.DEPLOY_HOST }}
           username: ${{ env.DEPLOY_USER }}
