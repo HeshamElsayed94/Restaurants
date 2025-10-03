@@ -1,0 +1,71 @@
+name: Build and Deploy ASP.Net Core App
+
+env:
+  PACKAGE_PATH: '.'
+  DOTNET_VERSION: '9'      # .NET version
+  DEPLOY_HOST: ${{ secrets.MONSTERASP_HOST }}   # MonsterASP host
+  DEPLOY_USER: ${{ secrets.MONSTERASP_USER }}   # MonsterASP username
+  DEPLOY_PASS: ${{ secrets.MONSTERASP_PASS }}   # MonsterASP password
+  DEPLOY_PATH: '/wwwroot'                        # Deployment path on server
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+
+      - name: Cache NuGet packages
+        uses: actions/cache@v3
+        with:
+          path: ~/.nuget/packages
+          key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-nuget-
+
+      - name: Restore dependencies
+        run: dotnet restore
+
+      - name: Build solution
+        run: dotnet build --configuration Release --no-restore
+
+      - name: Publish application
+        run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/api
+
+      - name: Upload artifact for deployment
+        uses: actions/upload-artifact@v4
+        with:
+          name: dotnet-app
+          path: ${{env.DOTNET_ROOT}}/api
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+      - name: Download build artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: dotnet-app
+          path: ./dotnet-app
+
+      - name: Deploy to MonsterASP via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4
+        with:
+          server: ${{ env.DEPLOY_HOST }}
+          username: ${{ env.DEPLOY_USER }}
+          password: ${{ env.DEPLOY_PASS }}
+          local-dir: ./dotnet-app
+          server-dir: ${{ env.DEPLOY_PATH }}
+          git-ftp-args: "--insecure" # optional if self-signed SSL
