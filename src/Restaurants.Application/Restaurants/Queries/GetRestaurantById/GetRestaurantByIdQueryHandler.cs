@@ -4,7 +4,6 @@ using Microsoft.Extensions.Logging;
 using Restaurants.Application.Contracts;
 using Restaurants.Application.Restaurants.Dtos;
 using Restaurants.Domain.Common.Results;
-using Restaurants.Domain.Contracts;
 using Restaurants.Domain.Entities.Restaurants;
 
 namespace Restaurants.Application.Restaurants.Queries.GetRestaurantById;
