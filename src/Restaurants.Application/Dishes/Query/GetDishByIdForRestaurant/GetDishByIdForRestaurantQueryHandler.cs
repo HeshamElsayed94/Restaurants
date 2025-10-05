@@ -1,11 +1,11 @@
 ﻿using Mediator;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using Restaurants.Application.Common.Results;
+using Restaurants.Application.Common.Results.Errors;
 using Restaurants.Application.Contracts;
 using Restaurants.Application.Dishes.Dtos;
-using Restaurants.Domain.Common.Results;
-using Restaurants.Domain.Contracts;
-using Restaurants.Domain.Entities.Restaurants;
+using Restaurants.Application.Restaurants.Errors;
 
 namespace Restaurants.Application.Dishes.Query.GetDishByIdForRestaurant;
 

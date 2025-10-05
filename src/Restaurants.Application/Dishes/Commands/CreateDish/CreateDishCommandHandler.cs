@@ -2,13 +2,14 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Hybrid;
 using Microsoft.Extensions.Logging;
+using Restaurants.Application.Common.Results;
+using Restaurants.Application.Common.Results.Errors;
 using Restaurants.Application.Contracts;
 using Restaurants.Application.Dishes.Extensions;
+using Restaurants.Application.Restaurants.Errors;
 using Restaurants.Application.Restaurants.Queries.Caching;
-using Restaurants.Domain.Common.Results;
 using Restaurants.Domain.Constans;
 using Restaurants.Domain.Contracts;
-using Restaurants.Domain.Entities.Restaurants;
 
 namespace Restaurants.Application.Dishes.Commands.CreateDish;
 internal class CreateDishCommandHandler(ILogger<CreateDishCommandHandler> logger,

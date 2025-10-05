@@ -1,6 +1,6 @@
 using Mediator;
+using Restaurants.Application.Common.Results;
 using Restaurants.Application.Restaurants.Dtos;
-using Restaurants.Domain.Common.Results;
 
 namespace Restaurants.Application.Restaurants.Queries.GetRestaurantById;
 

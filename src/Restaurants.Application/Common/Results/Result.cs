@@ -1,8 +1,9 @@
 ﻿using System.ComponentModel;
 using System.Text.Json.Serialization;
-using Restaurants.Domain.Common.Results.Interfaces;
+using Restaurants.Application.Common.Results.Errors;
+using Restaurants.Application.Common.Results.Interfaces;
 
-namespace Restaurants.Domain.Common.Results;
+namespace Restaurants.Application.Common.Results;
 
 public static class Result
 {
@@ -25,9 +26,7 @@ public class Result<TValue> : IResult<TValue>
 	public Result(TValue? value, List<Error>? errors)
 	{
 		if (value is not null)
-		{
 			_value = value;
-		}
 		else
 		{
 			if (errors == null || errors.Count == 0)

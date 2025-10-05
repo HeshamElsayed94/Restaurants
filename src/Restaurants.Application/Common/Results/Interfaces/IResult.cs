@@ -1,4 +1,6 @@
-﻿namespace Restaurants.Domain.Common.Results.Interfaces;
+﻿using Restaurants.Application.Common.Results.Errors;
+
+namespace Restaurants.Application.Common.Results.Interfaces;
 public interface IResult
 {
 	List<Error>? Errors { get; }

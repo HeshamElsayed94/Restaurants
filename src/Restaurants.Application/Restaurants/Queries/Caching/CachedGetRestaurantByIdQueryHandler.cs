@@ -1,9 +1,9 @@
 ﻿using Mediator;
 using Microsoft.Extensions.Caching.Hybrid;
 using Microsoft.Extensions.Logging;
+using Restaurants.Application.Common.Results;
 using Restaurants.Application.Restaurants.Dtos;
 using Restaurants.Application.Restaurants.Queries.GetRestaurantById;
-using Restaurants.Domain.Common.Results;
 
 namespace Restaurants.Application.Restaurants.Queries.Caching;
 internal class CachedGetRestaurantByIdQueryHandler(

@@ -1,6 +1,6 @@
-﻿using Restaurants.Domain.Common.Results;
+﻿using Restaurants.Application.Common.Results.Errors;
 
-namespace Restaurants.Domain.Entities.Restaurants;
+namespace Restaurants.Application.Restaurants.Errors;
 public static class RestaurantErrors
 {
 	public static Error RestaurantNotFound(int id)

@@ -1,10 +1,10 @@
 ﻿using Mediator;
 using Microsoft.Extensions.Caching.Hybrid;
 using Microsoft.Extensions.Logging;
+using Restaurants.Application.Common.Results;
 using Restaurants.Application.Dishes.Dtos;
 using Restaurants.Application.Dishes.Query.GetDishesForRestaurant;
 using Restaurants.Application.Restaurants.Queries.Caching;
-using Restaurants.Domain.Common.Results;
 
 namespace Restaurants.Application.Dishes.Query.Caching;
 internal class CachedGetDishesForRestaurantQueryHandler(ILogger<CachedGetDishesForRestaurantQueryHandler> logger,

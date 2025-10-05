@@ -1,5 +1,5 @@
 ﻿using Mediator;
-using Restaurants.Domain.Common.Results;
+using Restaurants.Application.Common.Results;
 
 namespace Restaurants.Application.Dishes.Commands.CreateDish;
 public record CreateDishCommand(

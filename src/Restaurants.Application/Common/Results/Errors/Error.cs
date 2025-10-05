@@ -1,7 +1,7 @@
 ﻿using System.Net;
 using System.Text.Json.Serialization;
 
-namespace Restaurants.Domain.Common.Results;
+namespace Restaurants.Application.Common.Results.Errors;
 public readonly record struct Error
 {
 	public string Code { get; }

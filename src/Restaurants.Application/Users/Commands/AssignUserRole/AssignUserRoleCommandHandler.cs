@@ -2,7 +2,8 @@ using Mediator;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Caching.Hybrid;
 using Microsoft.Extensions.Logging;
-using Restaurants.Domain.Common.Results;
+using Restaurants.Application.Common.Results;
+using Restaurants.Application.Common.Results.Errors;
 using Restaurants.Domain.Entities;
 
 namespace Restaurants.Application.Users.Commands.AssignUserRole;

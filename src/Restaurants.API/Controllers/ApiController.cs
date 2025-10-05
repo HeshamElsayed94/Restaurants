@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using Restaurants.Domain.Common.Results;
+using Restaurants.Application.Common.Results.Errors;
 
 namespace Restaurants.API.Controllers;
 [ApiController]

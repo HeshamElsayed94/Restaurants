@@ -2,8 +2,8 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Caching.Hybrid;
 using Microsoft.Extensions.Logging;
+using Restaurants.Application.Common.Results;
 using Restaurants.Application.Contracts;
-using Restaurants.Domain.Common.Results;
 using Restaurants.Domain.Entities;
 
 namespace Restaurants.Application.Users.Commands.LogOutFromAllDevices;
