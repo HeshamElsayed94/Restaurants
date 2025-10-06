@@ -16,7 +16,7 @@ public class ExceptionHandler(
 
 		httpContext.Response.StatusCode = exception switch
 		{
-			ValidationException or BadHttpRequestException => StatusCodes.Status400BadRequest,
+			FluentValidation.ValidationException or ValidationException or BadHttpRequestException => StatusCodes.Status400BadRequest,
 			_ => StatusCodes.Status500InternalServerError
 		};
 
@@ -28,7 +28,7 @@ public class ExceptionHandler(
 			{
 				Type = exception.GetType().Name,
 				Title = "Error occurred",
-				Detail = env.IsDevelopment() ? exception.StackTrace : exception.Message
+				Detail = env.IsDevelopment() ? $"{exception.Message} \n{exception.StackTrace}" : exception.Message
 			}
 		});
 
