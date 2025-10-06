@@ -16,7 +16,7 @@ public class ExceptionHandler(
 
 		httpContext.Response.StatusCode = exception switch
 		{
-			ValidationException => StatusCodes.Status400BadRequest,
+			ValidationException or BadHttpRequestException => StatusCodes.Status400BadRequest,
 			_ => StatusCodes.Status500InternalServerError
 		};
 
