@@ -11,14 +11,14 @@ public class CustomValidationResultFactory : IFluentValidationAutoValidationResu
 	public IActionResult CreateActionResult(ActionExecutingContext context, ValidationProblemDetails? validationProblemDetails)
 	{
 
-		validationProblemDetails!.Status = StatusCodes.Status422UnprocessableEntity;
-
-		if (validationProblemDetails.Errors.ContainsKey("$"))
+		if (validationProblemDetails!.Errors.ContainsKey("$"))
 		{
+			validationProblemDetails!.Status = StatusCodes.Status400BadRequest;
 			validationProblemDetails.Title = "One or more errors occurred.";
 			return new BadRequestObjectResult(validationProblemDetails);
 		}
 
+		validationProblemDetails!.Status = StatusCodes.Status422UnprocessableEntity;
 		validationProblemDetails.Type = "https://tools.ietf.org/html/rfc4918#section-11.2";
 		return new UnprocessableEntityObjectResult(validationProblemDetails);
 

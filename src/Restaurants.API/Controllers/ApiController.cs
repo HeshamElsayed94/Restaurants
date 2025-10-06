@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Restaurants.Application.Common.Results.Errors;
 
 namespace Restaurants.API.Controllers;
@@ -25,14 +24,17 @@ public class ApiController : ControllerBase
 	{
 		errors.ForEach(err => ModelState.AddModelError(err.Code, err.Description));
 
-		var problemDetails = new ValidationProblemDetails(ModelState)
-		{
-			Type = "https://tools.ietf.org/html/rfc4918#section-11.2",
-			Instance = $"{HttpContext.Request.Method} {HttpContext.Request.Path}",
-		};
-		problemDetails.Extensions.Add("requestId", HttpContext.TraceIdentifier);
-		problemDetails.Extensions.Add("traceId", Activity.Current?.Id);
+		//var problemDetails = new ValidationProblemDetails(ModelState)
+		//{
+		//	Type = "https://tools.ietf.org/html/rfc4918#section-11.2",
+		//	Instance = $"{HttpContext.Request.Method} {HttpContext.Request.Path}",
+		//};
+		//problemDetails.Extensions.Add("requestId", HttpContext.TraceIdentifier);
+		//problemDetails.Extensions.Add("traceId", Activity.Current?.Id);
 
-		return new UnprocessableEntityObjectResult(problemDetails);
+		//return new UnprocessableEntityObjectResult(problemDetails);
+
+		return ValidationProblem(statusCode: StatusCodes.Status422UnprocessableEntity, modelStateDictionary: ModelState);
+
 	}
 }
