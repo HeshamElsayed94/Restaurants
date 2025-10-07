@@ -24,7 +24,7 @@ where TRequest : IMessage
 
 		if (timeTaken.Seconds > 3)
 		{
-			logger.LogWarning("[PERFORMANCE] The request {Request} took {TimeTaken}s",
+			logger.LogWarning("[PERFORMANCE] The request {Request} took {TimeTaken} seconds.",
 			typeof(TRequest).Name, timeTaken.Seconds);
 		}
 
