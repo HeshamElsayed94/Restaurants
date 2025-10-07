@@ -1,4 +1,3 @@
-using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Diagnostics;
 
 namespace Restaurants.API.Exceptions;
@@ -16,7 +15,7 @@ public class ExceptionHandler(
 
 		httpContext.Response.StatusCode = exception switch
 		{
-			FluentValidation.ValidationException or ValidationException or BadHttpRequestException => StatusCodes.Status400BadRequest,
+			BadHttpRequestException => StatusCodes.Status400BadRequest,
 			_ => StatusCodes.Status500InternalServerError
 		};
 
