@@ -28,6 +28,11 @@ where TRequest : IMessage
 			typeof(TRequest).Name, timeTaken.Seconds);
 		}
 
+		logger.LogInformation(
+			"[END] Handled {Request} with {Response} .",
+			typeof(TRequest).Name,
+			typeof(TResponse).Name);
+
 		return response;
 	}
 }
