@@ -26,7 +26,11 @@ public static class DependencyInjection
 		services.AddFluentValidationAutoValidation(configuration
 			=> configuration.OverrideDefaultResultFactoryWith<CustomValidationResultFactory>());
 
-		services.AddMediator(optionts => optionts.ServiceLifetime = ServiceLifetime.Scoped);
+		services.AddMediator(optionts =>
+		{
+			optionts.ServiceLifetime = ServiceLifetime.Scoped;
+			optionts.PipelineBehaviors = [typeof(LoggingBehavior<,>)];
+		});
 
 		services.Scan(scan => scan.FromAssembliesOf(typeof(DependencyInjection))
 			.AddClasses()
