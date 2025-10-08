@@ -11,8 +11,12 @@ where TRequest : IMessage
 {
 	public async ValueTask<TResponse> Handle(TRequest request, MessageHandlerDelegate<TRequest, TResponse> next, CancellationToken ct)
 	{
+		string responseName = typeof(TResponse).IsGenericType
+			   ? $"{typeof(TResponse).Name.Trim('1', '`')}<{string.Join(',', typeof(TResponse).GenericTypeArguments.Select(x => x.Name))}>"
+			   : typeof(TResponse).Name;
+
 		logger.LogInformation("[START] Handle request={Request} - Response={Response} - RequestData={RequestData}",
-		typeof(TRequest).Name, typeof(TResponse).Name, request);
+		typeof(TRequest).Name, responseName, request);
 
 		var timer = new Stopwatch();
 		timer.Start();
@@ -31,7 +35,7 @@ where TRequest : IMessage
 		logger.LogInformation(
 			"[END] Handled {Request} with {Response} .",
 			typeof(TRequest).Name,
-			typeof(TResponse).Name);
+			responseName);
 
 		return response;
 	}
