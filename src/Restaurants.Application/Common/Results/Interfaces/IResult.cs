@@ -3,7 +3,7 @@
 namespace Restaurants.Application.Common.Results.Interfaces;
 public interface IResult
 {
-	List<Error>? Errors { get; }
+	IReadOnlyList<Error>? Errors { get; }
 
 	bool ISuccess { get; }
 }

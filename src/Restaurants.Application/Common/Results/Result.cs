@@ -14,9 +14,11 @@ public class Result<TValue> : IResult<TValue>
 {
 	private readonly TValue? _value;
 
+	private readonly List<Error>? _errors;
+
 	public TValue Value => _value!;
 
-	public List<Error>? Errors { get; }
+	public IReadOnlyList<Error>? Errors => _errors;
 
 	public bool ISuccess => Errors is null;
 
@@ -26,12 +28,14 @@ public class Result<TValue> : IResult<TValue>
 	public Result(TValue? value, List<Error>? errors)
 	{
 		if (value is not null)
+		{
 			_value = value;
+		}
 		else
 		{
 			if (errors == null || errors.Count == 0)
 				throw new ArgumentException("Provide at least one error.", nameof(errors));
-			Errors = errors;
+			_errors = errors;
 		}
 	}
 
@@ -43,7 +47,7 @@ public class Result<TValue> : IResult<TValue>
 		_value = value;
 	}
 
-	private Result(Error error) => Errors = [error];
+	private Result(Error error) => _errors = [error];
 
 	private Result(List<Error> errors)
 	{
@@ -51,7 +55,7 @@ public class Result<TValue> : IResult<TValue>
 		if (errors is null || errors.Count == 0)
 			throw new ArgumentException("Cannot create Errors from an empty collection of errors. Provide at least one error.", nameof(errors));
 
-		Errors = errors;
+		_errors = errors;
 	}
 
 	public static implicit operator Result<TValue>(TValue value) => new(value);
@@ -61,7 +65,7 @@ public class Result<TValue> : IResult<TValue>
 	public static implicit operator Result<TValue>(List<Error> errors) => new(errors);
 
 	public TNextValue Match<TNextValue>(Func<TValue, TNextValue> onValue, Func<List<Error>, TNextValue> onError)
-		=> !ISuccess ? onError(Errors!) : onValue(Value);
+		=> !ISuccess ? onError([.. Errors!]) : onValue(Value);
 }
 
 public readonly record struct Success;
