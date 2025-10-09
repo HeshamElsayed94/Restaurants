@@ -65,7 +65,7 @@ public class Result<TValue> : IResult<TValue>
 	public static implicit operator Result<TValue>(List<Error> errors) => new(errors);
 
 	public TNextValue Match<TNextValue>(Func<TValue, TNextValue> onValue, Func<List<Error>, TNextValue> onError)
-		=> !ISuccess ? onError([.. Errors!]) : onValue(Value);
+		=> !ISuccess ? onError(_errors!) : onValue(Value);
 }
 
 public readonly record struct Success;
